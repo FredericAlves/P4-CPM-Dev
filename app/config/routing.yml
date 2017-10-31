@@ -1,3 +1,5 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+louvre_ticketing:
+    resource: "@LouvreTicketingBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
