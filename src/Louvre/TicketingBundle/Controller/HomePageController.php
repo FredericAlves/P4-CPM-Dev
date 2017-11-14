@@ -2,6 +2,7 @@
 
 namespace Louvre\TicketingBundle\Controller;
 
+use Louvre\TicketingBundle\Entity\Booking;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
 
@@ -25,6 +26,15 @@ class HomePageController extends Controller
      */
     public function bookingAction()
     {
-        return $this->render('LouvreTicketingBundle:HomePage:booking.html.twig');
+        $booking = new Booking();
+        $id = $booking->getId();
+        $dateOfPurchase = $booking->getDateOfPurchase();
+        $reservationCode = $booking->getReservationCode();
+        return $this->get('templating')->renderResponse('LouvreTicketingBundle:HomePage:booking.html.twig', [
+            "booking" => $booking,
+            "dateOfPurchase" => $dateOfPurchase,
+            "reservationCode" => $reservationCode,
+            "id" => $id
+        ]);
     }
 }

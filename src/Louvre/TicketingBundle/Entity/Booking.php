@@ -46,9 +46,16 @@ class Booking
     /**
      * @var string
      *
-     * @ORM\Column(name="reservationNumber", type="string", length=255)
+     * @ORM\Column(name="reservationcode", type="string", length=255)
      */
-    private $reservationNumber;
+    private $reservationCode;
+
+
+    public function __construct()
+    {
+        $this->dateOfPurchase = new \DateTime();
+        $this->reservationCode = $this->generateRandomReservationCode();
+    }
 
 
     /**
@@ -134,27 +141,37 @@ class Booking
     }
 
     /**
-     * Set reservationNumber
+     * Set reservationCode
      *
-     * @param string $reservationNumber
+     * @param string $reservationCode
      *
      * @return Booking
      */
-    public function setReservationNumber($reservationNumber)
+    public function setReservationCode($reservationCode)
     {
-        $this->reservationNumber = $reservationNumber;
+        $this->reservationCode = $reservationCode;
 
         return $this;
     }
 
     /**
-     * Get reservationNumber
+     * Get reservationCode
      *
      * @return string
      */
-    public function getReservationNumber()
+    public function getReservationCode()
     {
-        return $this->reservationNumber;
+        return $this->reservationCode;
+    }
+
+    public function generateRandomReservationCode($length = 16, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    {
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
 
