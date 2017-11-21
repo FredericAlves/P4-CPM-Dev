@@ -51,8 +51,10 @@ class Booking
     private $reservationCode;
 
 
+
     public function __construct()
     {
+        $this->tickets = new \Doctrine\Common\Collections\arrayCollection();
         $this->dateOfPurchase = new \DateTime();
         $this->reservationCode = $this->generateRandomReservationCode();
     }
@@ -163,6 +165,44 @@ class Booking
     {
         return $this->reservationCode;
     }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param \Louvre\TicketingBundle\Entity\Ticket $ticket
+     *
+     * @return Booking
+     */
+    public function addTicket(Ticket $ticket)
+    {
+        $ticket->setBooking($this);
+        $this->tickets->add($ticket);
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param \Louvre\TicketingBundle\Entity\Ticket $ticket
+     */
+    public function removeTicket(ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+
+
 
     public function generateRandomReservationCode($length = 16, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
     {
