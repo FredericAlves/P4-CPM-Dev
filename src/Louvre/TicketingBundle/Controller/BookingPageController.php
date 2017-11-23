@@ -2,6 +2,8 @@
 
 namespace Louvre\TicketingBundle\Controller;
 
+use Louvre\TicketingBundle\Entity\Booking;
+use Louvre\TicketingBundle\Form\BookingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
 
@@ -19,12 +21,14 @@ class BookingPageController extends Controller
     }
 
     /**
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      *
      */
     public function bookingAction()
     {
+
+
         return $this->render('LouvreTicketingBundle:HomePage:booking.html.twig');
     }
 }

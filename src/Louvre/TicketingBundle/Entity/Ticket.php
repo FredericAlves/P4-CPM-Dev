@@ -27,12 +27,6 @@ class Ticket
      */
     private $booking;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateOfVisit", type="datetime")
-     */
-    private $dateOfVisit;
 
     /**
      * @var string
@@ -89,29 +83,7 @@ class Ticket
         return $this->id;
     }
 
-    /**
-     * Set dateOfVisit
-     *
-     * @param \DateTime $dateOfVisit
-     *
-     * @return Ticket
-     */
-    public function setDateOfVisit($dateOfVisit)
-    {
-        $this->dateOfVisit = $dateOfVisit;
 
-        return $this;
-    }
-
-    /**
-     * Get dateOfVisit
-     *
-     * @return \DateTime
-     */
-    public function getDateOfVisit()
-    {
-        return $this->dateOfVisit;
-    }
 
     /**
      * Set type

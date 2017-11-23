@@ -37,6 +37,13 @@ class Booking
     private $dateOfPurchase;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateOfVisit", type="datetime")
+     */
+    private $dateOfVisit;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
@@ -54,7 +61,7 @@ class Booking
 
     public function __construct()
     {
-        $this->tickets = new \Doctrine\Common\Collections\arrayCollection();
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateOfPurchase = new \DateTime();
         $this->reservationCode = $this->generateRandomReservationCode();
     }
@@ -116,6 +123,30 @@ class Booking
     public function getDateOfPurchase()
     {
         return $this->dateOfPurchase;
+    }
+
+    /**
+     * Set dateOfVisit
+     *
+     * @param \DateTime $dateOfVisit
+     *
+     * @return Booking
+     */
+    public function setDateOfVisit($dateOfVisit)
+    {
+        $this->dateOfVisit = $dateOfVisit;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfVisit
+     *
+     * @return \DateTime
+     */
+    public function getDateOfVisit()
+    {
+        return $this->dateOfVisit;
     }
 
     /**

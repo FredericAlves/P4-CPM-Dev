@@ -1,10 +1,23 @@
 {% extends "LouvreTicketingBundle::layout.html.twig" %}
 
 {%  block body %}
-
+        <div class="well">
         Reservation
         <p> date de reservation : {{ dateOfPurchase |date("d/m/Y")}} </p>
         <p> Code de reservation : {{ reservationCode }} </p>
+        {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_errors(form.dateOfVisit) }}
+                    {{ form_label(form.dateOfVisit) }}
+                        <br>
+                    {{ form_widget(form.dateOfVisit) }}
+                </div>
+        {{ form_row(form.email) }}
 
+        {{ form_row(form.tickets) }}
+        <a href="#" id="add_ticket" class="btn btn-default">Ajouter un visiteur</a>
+        {{ form_rest(form) }}
+        </div>
 
 {% endblock %}
+

@@ -3,6 +3,7 @@
 namespace Louvre\TicketingBundle\Controller;
 
 use Louvre\TicketingBundle\Entity\Booking;
+use Louvre\TicketingBundle\Form\BookingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
 
@@ -30,11 +31,17 @@ class HomePageController extends Controller
         $id = $booking->getId();
         $dateOfPurchase = $booking->getDateOfPurchase();
         $reservationCode = $booking->getReservationCode();
+
+
+        $form = $this->createForm(BookingType::class, $booking, ['method'=>'PUT']);
+
+
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:HomePage:booking.html.twig', [
             "booking" => $booking,
             "dateOfPurchase" => $dateOfPurchase,
             "reservationCode" => $reservationCode,
-            "id" => $id
+            "id" => $id,
+            'form' => $form->createView()
         ]);
     }
 }
