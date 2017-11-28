@@ -31,13 +31,6 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    private $type;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="category", type="string", length=255)
      */
     private $category;
@@ -84,30 +77,6 @@ class Ticket
     }
 
 
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Ticket
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 
     /**
      * Set category

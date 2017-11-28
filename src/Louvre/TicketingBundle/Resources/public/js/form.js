@@ -23,7 +23,7 @@
             });
         }
 
-        // La fonction qui ajoute un formulaire CategoryType
+        // La fonction qui ajoute un formulaire TicketType
         function addTicket($container) {
             // Dans le contenu de l'attribut « data-prototype », on remplace :
             // - le texte "__name__label__" qu'il contient par le label du champ
@@ -37,8 +37,9 @@
             var $prototype = $(template);
 
             // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-            addDeleteLink($prototype);
-
+            if (index > 0) {
+                addDeleteLink($prototype);
+            }
             // On ajoute le prototype modifié à la fin de la balise <div>
             $container.append($prototype);
 
@@ -57,7 +58,7 @@
             // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
             $deleteLink.click(function(e) {
                 $prototype.remove();
-
+                index--;
                 e.preventDefault(); // évite qu'un # apparaisse dans l'URL
                 return false;
             });

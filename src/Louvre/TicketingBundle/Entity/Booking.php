@@ -46,6 +46,13 @@ class Booking
     /**
      * @var string
      *
+     * @ORM\Column(name="duration", type="string", length=255)
+     */
+    private $duration;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -148,6 +155,31 @@ class Booking
     {
         return $this->dateOfVisit;
     }
+
+    /**
+     * Set duration
+     *
+     * @param string $duration
+     *
+     * @return Booking
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * Get duration
+     *
+     * @return string
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
 
     /**
      * Set email
