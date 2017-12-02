@@ -36,7 +36,7 @@ class HomePageController extends Controller
         $form = $this->createForm(BookingType::class, $booking, ['method'=>'PUT']);
 
 
-        return $this->get('templating')->renderResponse('LouvreTicketingBundle:HomePage:booking.html.twig', [
+        return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:booking.html.twig', [
             "booking" => $booking,
             "dateOfPurchase" => $dateOfPurchase,
             "reservationCode" => $reservationCode,

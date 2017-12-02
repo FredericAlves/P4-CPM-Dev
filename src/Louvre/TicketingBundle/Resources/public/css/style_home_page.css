@@ -22,6 +22,62 @@ footer {
     padding: 15px;
 }
 
+#accueil {
+    text-align: center;
+    height: 300px;
+    font-size: 3em;
+}
+
+.jumbotron {
+    text-align: center;
+    color: white;
+
+}
+
+.center {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3em;
+}
+
+img {
+        width: 100%;
+        height: auto;
+
+}
+
+#louvre_ticketingbundle_booking_dateOfVisit {
+    text-align: center;
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#louvre_ticketingbundle_booking_tickets___name___dateOfBirth {
+    text-align: center;
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+.navbar-default {
+    background-color: #2e3436;
+    border-color: #2e3436;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+}
+
+
+
+.well {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -31,4 +87,26 @@ footer {
         padding: 15px;
     }
     .row.content {height:auto;}
+
+    #louvre_ticketingbundle_booking_dateOfVisit {
+        text-align: center;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #louvre_ticketingbundle_booking_tickets___name___dateOfBirth {
+        text-align: center;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .center {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2em;
+    }
 }

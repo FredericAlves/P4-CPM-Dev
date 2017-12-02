@@ -27,7 +27,7 @@ class TicketType extends AbstractType
                 "widget" => "single_text",
                 'format' => 'dd-MM-yyyy',
                 "attr" => array(
-                    "class" => "datepicker form-control",
+                    "class" => "form-control",
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
                     'data-date-language' => 'fr',
