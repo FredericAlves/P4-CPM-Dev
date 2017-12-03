@@ -27,6 +27,18 @@ class HomePageController extends Controller
      */
     public function bookingAction()
     {
+
+        return $this->render('LouvreTicketingBundle:BookingPage:booking.html.twig');
+    }
+
+
+    /**
+     * @return Response
+     *
+     *
+     */
+    public function bookingStepTwoAction()
+    {
         $booking = new Booking();
         $id = $booking->getId();
         $dateOfPurchase = $booking->getDateOfPurchase();
@@ -36,7 +48,7 @@ class HomePageController extends Controller
         $form = $this->createForm(BookingType::class, $booking, ['method'=>'PUT']);
 
 
-        return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:booking.html.twig', [
+        return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig', [
             "booking" => $booking,
             "dateOfPurchase" => $dateOfPurchase,
             "reservationCode" => $reservationCode,

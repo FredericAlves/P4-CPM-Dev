@@ -5,3 +5,7 @@ louvre_ticketing_homepage:
 louvre_ticketing_bookingpage:
     path:     /booking
     defaults: { _controller: LouvreTicketingBundle:HomePage:booking }
+
+louvre_ticketing_bookingsteptwopage:
+    path:     /booking-step-two
+    defaults: { _controller: LouvreTicketingBundle:HomePage:bookingsteptwo }

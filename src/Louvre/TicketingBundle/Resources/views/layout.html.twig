@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/louvreticketing/css/style_home_page.css') }}" type="text/css" />
+
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
@@ -25,47 +26,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Musée du Louvre</a>
+            <a class="navbar-brand" href="{{ path('louvre_ticketing_homepage') }}">Musée du Louvre</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                {% if app.request.attributes.get('_route') == 'ta_route' %}class="active"{% endif %}
                 <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_homepage' %}class="active"{% endif %}><a href="{{ path('louvre_ticketing_homepage') }}">Accueil <span class="sr-only">(current)</span></a></li>
                 <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingpage' %}class="active"{% endif %}><a href="{{ path('louvre_ticketing_bookingpage') }}">Billetterie</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Recherche">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Recherche</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
+
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -84,7 +60,50 @@
 </div>
 
 <footer>
-        <p></p>
+    <section class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4  col-md-4 col-sm-4">
+                    <div class="footer_dv">
+                        <h4>Informations pratiques</h4>
+                        <ul>
+                            <li><a href="">Horaires et tarifs</a></li>
+
+                            <li><a href="">Préparer sa visite</a></li>
+                            <li><a href="">Louvre, mode d'emploi</a></li>
+                            <li><a href="">Plans du musée</a></li>
+                            <li><a href="">Comment venir ?</a></li>
+                            <li><a href="">Groupes et scolaires</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4  col-md-4 col-sm-4">
+                    <div class="footer_dv">
+                        <h4>Actualités et Expositions</h4>
+                        <ul>
+                            <li><a href="">Evénements</a></li>
+                            <li><a href="">Conférences et colloques</a></li>
+                            <li><a href="">Spectacle vivant et littérature</a></li>
+                            <li><a href="">Expositions</a></li>
+                            <li><a href="">Films</a></li>
+                            <li><a href="">Archives</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4  col-md-4 col-sm-4">
+                    <div class="footer_dv">
+                        <h4>Nous contacter</h4>
+                        <p>Service client</p>
+                        <p>+ 33 (0)1 40 20 50 50<br>
+
+
+                        </p></div>
+                </div>
+            </div>
+        </div>
+    </section>
 </footer>
 
 
