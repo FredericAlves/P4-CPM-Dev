@@ -25,9 +25,11 @@ footer {
 #accueil {
     text-align: center;
     width: 50%;
-    font-size: 1em;
+    height: 300px;
+    font-size: 3em;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 .jumbotron {
@@ -76,7 +78,7 @@ img {
 
 
 .well {
-    width: 50%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
