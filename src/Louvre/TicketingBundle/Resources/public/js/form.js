@@ -30,7 +30,7 @@
             // - le texte "__name__" qu'il contient par le numéro du champ
             var template = $container.attr('data-prototype')
                .replace(/__name__label__/g, 'Visiteur n° ' + (index+1))
-
+               .replace(/louvre_ticketingbundle_booking_tickets___name__/g, 'louvre_ticketingbundle_booking_tickets___name__' + (index+1))
             ;
 
             // On crée un objet jquery qui contient ce template
@@ -40,6 +40,12 @@
             if (index > 0) {
                 addDeleteLink($prototype);
             }
+
+            // si il y a plusieurs visiteur on supprime le delete sauf pour le dernier
+            if (index > 1) {
+                delDeleteLink();
+            }
+
             // On ajoute le prototype modifié à la fin de la balise <div>
             $container.append($prototype);
 
@@ -50,7 +56,8 @@
         // La fonction qui ajoute un lien de suppression d'une catégorie
         function addDeleteLink($prototype) {
             // Création du lien
-            var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+            var $deleteLink = $('<a href="#" class="btn btn-danger visitor' + (index+1) + ' ">Supprimer</a>');
+
 
             // Ajout du lien
             $prototype.append($deleteLink);
@@ -58,9 +65,30 @@
             // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
             $deleteLink.click(function(e) {
                 $prototype.remove();
+                if (index > 1) {
+                    addDeleteLink2();
+                }
                 index--;
                 e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+
                 return false;
             });
+        }
+
+        function addDeleteLink2() {
+            // Création du lien
+            var $deleteLink2 = $('<a href="#" class="btn btn-danger visitor' + (index) + ' ">Supprimer</a>');
+            $('#louvre_ticketingbundle_booking_tickets___name__'+ (index-1)).after($deleteLink2);
+
+
+        }
+
+        function delDeleteLink() {
+            // Création du lien
+
+            $(".visitor" + index).remove();
+
+
+
         }
     });

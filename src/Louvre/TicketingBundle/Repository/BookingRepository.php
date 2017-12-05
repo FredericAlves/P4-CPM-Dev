@@ -10,4 +10,16 @@ namespace Louvre\TicketingBundle\Repository;
  */
 class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param Booking $booking
+     * @param bool $flush
+     */
+    public function add(Booking $booking, $flush = true)
+    {
+
+        $this->getEntityManager()->persist($booking);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 }

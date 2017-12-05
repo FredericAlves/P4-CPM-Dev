@@ -4,8 +4,12 @@ louvre_ticketing_homepage:
 
 louvre_ticketing_bookingpage:
     path:     /booking
-    defaults: { _controller: LouvreTicketingBundle:HomePage:booking }
+    defaults: { _controller: LouvreTicketingBundle:BookingPage:index }
+
+louvre_ticketing_bookingsteponepage:
+    path:     /booking-step-one
+    defaults: { _controller: LouvreTicketingBundle:BookingPage:bookingstepone }
 
 louvre_ticketing_bookingsteptwopage:
     path:     /booking-step-two
-    defaults: { _controller: LouvreTicketingBundle:HomePage:bookingsteptwo }
+    defaults: { _controller: LouvreTicketingBundle:BookingPage:bookingsteptwo }

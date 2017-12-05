@@ -21,11 +21,19 @@ class Booking
      */
     private $id;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numberOfTickets", type="integer")
+     */
+    private $numberOfTickets;
+
+
 
     /**
      * @var int
      *
-     * @ORM\Column(name="bill", type="integer")
+     * @ORM\Column(name="bill", type="integer", nullable=true)
      */
     private $bill;
 
@@ -82,6 +90,30 @@ class Booking
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set numberOfTickets
+     *
+     * @param integer $numberOfTickets
+     *
+     * @return Booking
+     */
+    public function setNumberOfTickets($numberOfTickets)
+    {
+        $this->numberOfTickets = $numberOfTickets;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfTickets
+     *
+     * @return int
+     */
+    public function getNumberOfTickets()
+    {
+        return $this->numberOfTickets;
     }
 
     /**

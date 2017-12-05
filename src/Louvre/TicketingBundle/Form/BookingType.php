@@ -2,9 +2,10 @@
 
 namespace Louvre\TicketingBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -30,24 +31,21 @@ class BookingType extends AbstractType
                     "id" =>"calendar",
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
-                    'data-date-days-of-week-disabled' => '02',
+                    'data-date-days-of-week-disabled' => '02 06',
                     'data-date-language' => 'fr',
                            )
             ))
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, array(
+                'label' => 'Votre adresse mail :'
+            ))
             ->add('duration', ChoiceType::class, array(
-                'label' => 'Journée / demi-journée',
+                'label' => 'Billet(s) "Journée" ou "demi-journée"',
                 'choices'  => array(
                     'Journée' => true,
                     'Demi-journée' => false,
                 )))
-            ->add('tickets', CollectionType::class, array (
-                'entry_type' => TicketType::class,
-                'label' => 'les personnnes concernées par votre réservation: ',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                "attr" => array(
-                    "id" => 'tickets')
+            ->add('numberOfTickets', IntegerType::class, array(
+              "label" => "Nombre de visiteur(s)"
             ))
             ->add('Commander', SubmitType::class);
     }
