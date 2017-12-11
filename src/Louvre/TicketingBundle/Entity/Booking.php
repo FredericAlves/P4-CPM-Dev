@@ -3,6 +3,7 @@
 namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
@@ -48,6 +49,7 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="dateOfVisit", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateOfVisit;
 

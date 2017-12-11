@@ -10,7 +10,7 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/louvreticketing/plugin/css/bootstrap-datepicker3.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/louvreticketing/css/main.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/louvreticketing/css/tunnel.css') }}" type="text/css" />
 
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_homepage' %}class="active"{% endif %}><a href="{{ path('louvre_ticketing_homepage') }}">Accueil <span class="sr-only">(current)</span></a></li>
-                <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingpage' %}class="active"{% endif %}><a href="{{ path('louvre_ticketing_bookingpage') }}">Billetterie</a></li>
+                <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingsteponepage' %}class="active"{% endif %}><a href="{{ path('louvre_ticketing_bookingsteponepage') }}">Billetterie</a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -47,7 +47,7 @@
     </div><!-- /.container-fluid -->
 </nav>
     <div id="header" class="jumbotron">
-        <img src="{{ asset('bundles/louvreticketing/images/louvre-panorama.png') }}" alt="Norway" width="1000" height="300">
+        <img src="{{ asset('bundles/louvreticketing/images/louvre-panorama.png') }}" alt="Louvre"  >
         <div class="center">Musée du Louvre</div>
 </div>
 
@@ -68,7 +68,7 @@
                     <div class="footer_dv">
                         <h4>Informations pratiques</h4>
                         <ul>
-                            <li><a href="{{ path('louvre_ticketing_bookingpage') }}">Billetterie</a></li>
+                            <li><a href="{{ path('louvre_ticketing_bookingsteponepage') }}">Billetterie</a></li>
                             <li><a href="">Préparer sa visite</a></li>
                             <li><a href="">Louvre, mode d'emploi</a></li>
                             <li><a href="">Plans du musée</a></li>
@@ -112,8 +112,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <script src="{{ asset('bundles/louvreticketing/js/bootstrap-datepicker.fr.min.js') }}"></script>
+    <script src="{{ asset('bundles/louvreticketing/plugin/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/louvreticketing/plugin/locales/bootstrap-datepicker.fr.min.js') }}"></script>
     <script src="{{ asset('bundles/louvreticketing/js/main.js') }}"></script>
     <script src="{{ asset('bundles/louvreticketing/js/form.js') }}"></script>
     <script src="{{ asset('bundles/louvreticketing/js/date.js') }}"></script>

@@ -28,24 +28,27 @@ class BookingType extends AbstractType
                 "placeholder" => "Choisissez une date",
                 "attr" => array(
                     "class" => "form-control input-inline datepicker",
-                    "id" =>"calendar",
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
-                    'data-date-days-of-week-disabled' => '02 06',
+                    'data-date-days-of-week-disabled' => '02',
+                    'data-date-today-highlight' => 'true',
                     'data-date-language' => 'fr',
+                    'data-date-start-date' => "0d",
+                    'data-date-end-date' => '+364d'
                            )
             ))
             ->add('email', EmailType::class, array(
                 'label' => 'Votre adresse mail :'
             ))
             ->add('duration', ChoiceType::class, array(
-                'label' => 'Billet(s) "Journée" ou "demi-journée"',
+                'label' => 'Billet(s) "Journée" ou "demi-journée" :',
                 'choices'  => array(
                     'Journée' => true,
                     'Demi-journée' => false,
                 )))
             ->add('numberOfTickets', IntegerType::class, array(
-              "label" => "Nombre de visiteur(s)"
+                    "label" => "Nombre de visiteur(s) :",
+                    'attr' => array('min' =>1, 'max' =>10)
             ))
             ->add('Commander', SubmitType::class);
     }

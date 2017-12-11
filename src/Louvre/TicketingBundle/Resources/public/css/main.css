@@ -32,10 +32,18 @@ footer {
 
 }
 
-.jumbotron {
-    text-align: center;
-    color: white;
+#contraintes{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
 
+.jumbotron {
+    color: white;
+    padding-bottom : 0;
+    padding-top: 0;
+    margin-bottom :10px;
 }
 
 .center {
@@ -129,6 +137,18 @@ img {
         text-align: justify;
     }
 
+    .datepicker table tr td.new, .datepicker table tr td.old{
+        opacity: 0.4;
+        color: black;
+    }
+    .datepicker table tr td.disabled{
+        background: rgba(218,218,218,0.8);
+
+    }
+    .datepicker table tr td.disabled, .datepicker table tr td.active, .datepicker table tr td.active:hover{
+        border-radius: 2%;
+    }
+
 
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -153,6 +173,25 @@ img {
         margin-right: auto;
     }
 
+    #contraintes{
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
+
+    .jumbotron {
+        color: white;
+        padding-bottom : 0;
+        padding-top: 0;
+        height: 150px;
+        margin-bottom :10px;
+    }
+
+    img{
+
+        height: 100%;
+    }
     .center {
         position: absolute;
         top: 15%;

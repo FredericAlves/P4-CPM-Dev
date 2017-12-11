@@ -13,14 +13,9 @@
     <div class="well">
         Reservation
 
-
-        {{ form_start(form) }}
-
-        <div class="form-group">
-            {{ form_row(form.tickets) }}
-            <a href="#" id="add_ticket" class="btn btn-default">Ajouter un visiteur</a>
-            {{ form_rest(form) }}
-        </div>
+        {{ id }} <br/>
+        {{ numberOfTickets }} <br/>
+        {{ dateOfVisit|date('Y-m-d') }}
 
 
     </div>

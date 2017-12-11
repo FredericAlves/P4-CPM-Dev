@@ -51,7 +51,7 @@ class BookingPageController extends Controller
             $em->persist($booking);
             $em->flush();
 
-            return $this->redirectToRoute("louvre_ticketing_homepage");
+            return $this->redirectToRoute("louvre_ticketing_bookingsteptwopage", ['reservationCode' => $booking->getReservationCode()]);
 
         }
 
@@ -69,12 +69,17 @@ class BookingPageController extends Controller
      *
      *
      */
-    public function bookingStepTwoAction()
+    public function bookingStepTwoAction( Booking $booking)
     {
-        $form = $this->createForm(TicketType::class, ['method'=>'PUT']);
+        $id = $booking->getId();
+        $dateOfVisit = $booking->getDateOfVisit();
+        $numberOfTickets = $booking->getNumberOfTickets();
 
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig',[
-        'form' => $form->createView()
+
+           "id" => $id,
+           "dateOfVisit" => $dateOfVisit,
+           "numberOfTickets" => $numberOfTickets
     ]);
     }
 }
