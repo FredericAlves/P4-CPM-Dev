@@ -47,8 +47,7 @@ class BookingType extends AbstractType
                     'Demi-journée' => false,
                 )))
             ->add('numberOfTickets', IntegerType::class, array(
-                    "label" => "Nombre de visiteur(s) :",
-                    'attr' => array('min' =>1, 'max' =>10)
+                    "label" => "Nombre de visiteur(s) :"
             ))
             ->add('Commander', SubmitType::class);
     }

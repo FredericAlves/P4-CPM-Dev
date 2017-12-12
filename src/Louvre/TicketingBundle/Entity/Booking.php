@@ -24,7 +24,12 @@ class Booking
 
     /**
      * @var int
-     *
+     * @Assert\Range(
+     *     min = 1,
+     *     max = 10,
+     *     minMessage = "Il doit y avoir au moins un visiteur !",
+     *     maxMessage = "Réservation possible pour 10 visiteurs maximum par commande !"
+     * )
      * @ORM\Column(name="numberOfTickets", type="integer")
      */
     private $numberOfTickets;
@@ -46,10 +51,10 @@ class Booking
     private $dateOfPurchase;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="dateOfVisit", type="datetime")
-     * @Assert\GreaterThan("today")
+     * @ORM\Column(name="dateOfVisit", type="date")
+     * @Assert\GreaterThan("today", message = "La date doit être supérieure ou égale à la date du jour !")
      */
     private $dateOfVisit;
 

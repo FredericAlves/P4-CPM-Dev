@@ -13,10 +13,10 @@
     <div class="well">
         Reservation
 
-        {{ id }} <br/>
-        {{ numberOfTickets }} <br/>
-        {{ dateOfVisit|date('Y-m-d') }}
-
+        Id de la transaction : {{ id }} <br/>
+        Nombre de visiteurs : {{ numberOfTickets }} <br/>
+        Date de la visite : {{ dateOfVisit|date('Y-m-d') }} <br/>
+        Nombre de billets total vendus pour ce jour : {{ totalTicketsForTheDay }}
 
     </div>
 

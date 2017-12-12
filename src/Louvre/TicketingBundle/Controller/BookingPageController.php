@@ -5,6 +5,8 @@ namespace Louvre\TicketingBundle\Controller;
 use Louvre\TicketingBundle\Entity\Booking;
 use Louvre\TicketingBundle\Form\BookingType;
 use Louvre\TicketingBundle\Form\TicketType;
+use Louvre\TicketingBundle\LouvreTicketingBundle;
+use Louvre\TicketingBundle\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,15 +73,23 @@ class BookingPageController extends Controller
      */
     public function bookingStepTwoAction( Booking $booking)
     {
+        $em = $this->getDoctrine()->getManager();
         $id = $booking->getId();
         $dateOfVisit = $booking->getDateOfVisit();
         $numberOfTickets = $booking->getNumberOfTickets();
+
+        $ticketsForTheDay = $em->getRepository('LouvreTicketingBundle:Booking')->findByBookingDateOfVisit($booking->getDateOfVisit());
+        $totalTicketsForTheDay = 0;
+        foreach($ticketsForTheDay as $ticketForTheDay) {
+            $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
+        }
 
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig',[
 
            "id" => $id,
            "dateOfVisit" => $dateOfVisit,
-           "numberOfTickets" => $numberOfTickets
+           "numberOfTickets" => $numberOfTickets,
+           "totalTicketsForTheDay" => $totalTicketsForTheDay
     ]);
     }
 }
