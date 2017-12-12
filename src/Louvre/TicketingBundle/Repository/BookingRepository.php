@@ -2,6 +2,9 @@
 
 namespace Louvre\TicketingBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * BookingRepository
  *
@@ -10,16 +13,24 @@ namespace Louvre\TicketingBundle\Repository;
  */
 class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
-    /**
-     * @param Booking $booking
-     * @param bool $flush
-     */
-    public function add(Booking $booking, $flush = true)
-    {
 
-        $this->getEntityManager()->persist($booking);
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+    public function findByBookingDateOfVisit($date) {
+        return $this->createQueryBuilder('booking')
+            ->where('booking.dateOfVisit = :date')
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->getQuery()
+            ->execute();
+
+    }
+
+
+
+    public function getNumberOfTicketsForADate ($date) {
+        return $this->createQueryBuilder('booking')
+            ->select('SUM(booking.numberOfTickets) AS totalTickets')
+            ->where('booking.dateOfVisit =:date')
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->getQuery();
+
     }
 }
