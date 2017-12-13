@@ -22,7 +22,7 @@ class TicketType extends AbstractType
         $builder
             ->add('lastname', TextType::class, ['label' => 'Nom'])
             ->add('firstName', TextType::class, ['label' => 'Prénom'])
-            ->add('dateOfBirth', BirthdayType::class, array(
+            ->add('birthDate', BirthdayType::class, array(
                 "label" => "Date de naissance",
                 "widget" => "single_text",
                 'format' => 'dd-MM-yyyy',
@@ -32,7 +32,7 @@ class TicketType extends AbstractType
                     'data-date-format' => 'dd-mm-yyyy',
                     'data-date-language' => 'fr',
                 )))
-            ->add('isReduced', CheckboxType::class, [
+            ->add('category', CheckboxType::class, [
                 'label' => 'Tarif réduit',
                 'required' => false
             ]);

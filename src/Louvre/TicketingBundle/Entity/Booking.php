@@ -58,6 +58,7 @@ class Booking
      */
     private $dateOfVisit;
 
+
     /**
      * @var string
      *
@@ -78,6 +79,11 @@ class Booking
      * @ORM\Column(name="reservationcode", type="string", length=255)
      */
     private $reservationCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Louvre\TicketingBundle\Entity\Ticket", mappedBy="booking", cascade={"persist"})
+     */
+    private $tickets;
 
 
 
@@ -188,7 +194,7 @@ class Booking
     /**
      * Get dateOfVisit
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getDateOfVisit()
     {
@@ -287,8 +293,9 @@ class Booking
      */
     public function addTicket(Ticket $ticket)
     {
+
+        $this->tickets[] = $ticket;
         $ticket->setBooking($this);
-        $this->tickets->add($ticket);
 
         return $this;
     }
@@ -314,6 +321,11 @@ class Booking
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function findDayOfTheWeek () {
+        $dayOfTheWeek = $this->getDateOfVisit()->format("w");
+        return $dayOfTheWeek;
     }
 }
 

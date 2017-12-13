@@ -21,7 +21,7 @@ class areThereThousandTicketsSoldValidator extends ConstraintValidator
     {
         $date = $value->get
         $ticketsSum = $this->bookingServices->totalNumberOfTickets($date);
-        if (limitIsReached) {
+        if () {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ string }}', $value)
                 ->addViolation();

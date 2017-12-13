@@ -3,6 +3,7 @@
 namespace Louvre\TicketingBundle\Controller;
 
 use Louvre\TicketingBundle\Entity\Booking;
+use Louvre\TicketingBundle\Form\BookingStepTwoType;
 use Louvre\TicketingBundle\Form\BookingType;
 use Louvre\TicketingBundle\Form\TicketType;
 use Louvre\TicketingBundle\LouvreTicketingBundle;
@@ -49,6 +50,14 @@ class BookingPageController extends Controller
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()){
 
+//            $dayVisit = $booking->getDateOfVisit();
+            $dayOfTheWeekVisit = $booking->findDayOfTheWeek();
+
+            if ($dayOfTheWeekVisit == 0 || $dayOfTheWeekVisit == 2 ) {
+                $this->addFlash('error', 'Désolé ! Les réservation ne sont pas possibles pour les mardi et dimanche !');
+                return $this->redirectToRoute('louvre_ticketing_bookingsteponepage');
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($booking);
             $em->flush();
@@ -71,7 +80,7 @@ class BookingPageController extends Controller
      *
      *
      */
-    public function bookingStepTwoAction( Booking $booking)
+    public function bookingStepTwoAction( Request $request, Booking $booking)
     {
         $em = $this->getDoctrine()->getManager();
         $id = $booking->getId();
@@ -84,12 +93,25 @@ class BookingPageController extends Controller
             $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
         }
 
+        $form = $this->createForm(BookingStepTwoType::class, $booking, ['method'=>'PUT']);
+
+        if ($form->handleRequest($request)->isSubmitted() && $form->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tickets[]);
+            $em->flush();
+
+            return $this->redirectToRoute("louvre_ticketing_homepage");
+
+        }
+
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig',[
 
            "id" => $id,
            "dateOfVisit" => $dateOfVisit,
            "numberOfTickets" => $numberOfTickets,
-           "totalTicketsForTheDay" => $totalTicketsForTheDay
+           "totalTicketsForTheDay" => $totalTicketsForTheDay,
+           'form' => $form->createView()
     ]);
     }
 }

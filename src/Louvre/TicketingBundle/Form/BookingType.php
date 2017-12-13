@@ -34,7 +34,9 @@ class BookingType extends AbstractType
                     'data-date-today-highlight' => 'true',
                     'data-date-language' => 'fr',
                     'data-date-start-date' => "0d",
-                    'data-date-end-date' => '+364d'
+                    'data-date-end-date' => '+364d',
+                    'data-date-dates-disabled' => '25-12-2017',
+                    'data-date-autoclose' => true
                            )
             ))
             ->add('email', EmailType::class, array(

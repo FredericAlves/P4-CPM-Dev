@@ -14,9 +14,17 @@
         Reservation
 
         Id de la transaction : {{ id }} <br/>
-        Nombre de visiteurs : {{ numberOfTickets }} <br/>
-        Date de la visite : {{ dateOfVisit|date('Y-m-d') }} <br/>
+        Nombre de visiteurs : <div id="numberOfTickets">{{ numberOfTickets }}</div> <br/>
+        Date de la visite : {{ dateOfVisit|date('d-m-Y') }} <br/>
         Nombre de billets total vendus pour ce jour : {{ totalTicketsForTheDay }}
+
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.tickets) }}
+
+                {{ form_rest(form) }}
+            </div>
+        {{ form_end(form) }}
 
     </div>
 
