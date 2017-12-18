@@ -5,31 +5,16 @@ namespace Louvre\TicketingBundle\Controller;
 use Louvre\TicketingBundle\Entity\Booking;
 use Louvre\TicketingBundle\Form\BookingStepTwoType;
 use Louvre\TicketingBundle\Form\BookingType;
-use Louvre\TicketingBundle\Form\TicketType;
-use Louvre\TicketingBundle\LouvreTicketingBundle;
-use Louvre\TicketingBundle\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
 
 class BookingPageController extends Controller
 {
-
-
-    /**
-     * @return Response
-     *
-     *
-     */
-    public function indexAction()
-    {
-
-        return $this->render('LouvreTicketingBundle:BookingPage:booking.html.twig');
-    }
-
 
     /**
      * @param Request $request
@@ -45,12 +30,11 @@ class BookingPageController extends Controller
         $reservationCode = $booking->getReservationCode();
 
 
-        $form = $this->createForm(BookingType::class, $booking, ['method'=>'PUT']);
+        $form = $this->createForm(BookingType::class, $booking);
 
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()){
 
-//            $dayVisit = $booking->getDateOfVisit();
             $dayOfTheWeekVisit = $booking->findDayOfTheWeek();
 
             if ($dayOfTheWeekVisit == 0 || $dayOfTheWeekVisit == 2 ) {
@@ -58,16 +42,15 @@ class BookingPageController extends Controller
                 return $this->redirectToRoute('louvre_ticketing_bookingsteponepage');
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($booking);
-            $em->flush();
+              $em = $this->getDoctrine()->getManager();
+              $em->persist($booking);
+              $em->flush();
 
             return $this->redirectToRoute("louvre_ticketing_bookingsteptwopage", ['reservationCode' => $booking->getReservationCode()]);
 
         }
 
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepone.html.twig', [
-            "booking" => $booking,
             "dateOfPurchase" => $dateOfPurchase,
             "reservationCode" => $reservationCode,
             "id" => $id,
@@ -80,33 +63,35 @@ class BookingPageController extends Controller
      *
      *
      */
-    public function bookingStepTwoAction( Request $request, Booking $booking)
+    public function bookingStepTwoAction(Request $request, Booking $booking)
     {
         $em = $this->getDoctrine()->getManager();
         $id = $booking->getId();
+        $booking->addTickets($booking);
         $dateOfVisit = $booking->getDateOfVisit();
         $numberOfTickets = $booking->getNumberOfTickets();
 
-        $ticketsForTheDay = $em->getRepository('LouvreTicketingBundle:Booking')->findByBookingDateOfVisit($booking->getDateOfVisit());
+
+        $ticketsForTheDay = $em->getRepository('LouvreTicketingBundle:Booking')->findByDateOfVisit($dateOfVisit);
         $totalTicketsForTheDay = 0;
         foreach($ticketsForTheDay as $ticketForTheDay) {
             $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
         }
 
-        $form = $this->createForm(BookingStepTwoType::class, $booking, ['method'=>'PUT']);
+        $form = $this->createForm(BookingStepTwoType::class);
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()){
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($tickets[]);
-            $em->flush();
 
-            return $this->redirectToRoute("louvre_ticketing_homepage");
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($tickets[]);
+//            $em->flush();
+
+ //           return $this->redirectToRoute("louvre_ticketing_homepage");
 
         }
 
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig',[
-
            "id" => $id,
            "dateOfVisit" => $dateOfVisit,
            "numberOfTickets" => $numberOfTickets,

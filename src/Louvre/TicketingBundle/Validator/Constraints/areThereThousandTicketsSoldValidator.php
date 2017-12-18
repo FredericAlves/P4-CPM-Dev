@@ -19,7 +19,7 @@ class areThereThousandTicketsSoldValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        $date = $value->get
+        $date = $value->get;
         $ticketsSum = $this->bookingServices->totalNumberOfTickets($date);
         if () {
             $this->context->buildViolation($constraint->message)

@@ -14,17 +14,6 @@ use Doctrine\ORM\QueryBuilder;
 class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findByBookingDateOfVisit($date) {
-        return $this->createQueryBuilder('booking')
-            ->where('booking.dateOfVisit = :date')
-            ->setParameter('date', $date->format('Y-m-d'))
-            ->getQuery()
-            ->execute();
-
-    }
-
-
-
     public function getNumberOfTicketsForADate ($date) {
         return $this->createQueryBuilder('booking')
             ->select('SUM(booking.numberOfTickets) AS totalTickets')

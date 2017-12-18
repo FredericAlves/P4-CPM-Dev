@@ -4,6 +4,7 @@ namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Booking
@@ -92,6 +93,7 @@ class Booking
         $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateOfPurchase = new \DateTime();
         $this->reservationCode = $this->generateRandomReservationCode();
+        $this->tickets = new ArrayCollection();
     }
 
 
@@ -310,6 +312,11 @@ class Booking
         $this->tickets->removeElement($ticket);
     }
 
+    public function clearTickets()
+    {
+        $this->getTickets()->clear();
+    }
+
 
 
 
@@ -327,5 +334,26 @@ class Booking
         $dayOfTheWeek = $this->getDateOfVisit()->format("w");
         return $dayOfTheWeek;
     }
+
+    public function addTickets(Booking $booking) {
+        $ticketsQty = $this->getNumberOfTickets();
+        $tickets = $this->getTickets();
+        if ($tickets->isEmpty()) {
+            for ($i = 1; $i <= $ticketsQty; $i++)
+            {
+                $ticket = new Ticket();
+                $booking->addTicket($ticket);
+            }
+        }
+        elseif ($ticketsQty != $tickets->count()) {
+            $booking->clearTickets();
+            for ($i = 1; $i <= $ticketsQty; $i++)
+            {
+                $ticket = new Ticket();
+                $booking->addTicket($ticket);
+            }
+        }
+    }
+
 }
 
