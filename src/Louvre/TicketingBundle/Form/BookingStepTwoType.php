@@ -26,8 +26,7 @@ class BookingStepTwoType extends AbstractType
                 'label' => 'les personnnes concernées par votre réservation: ',
                 'allow_add'    => true,
                 'allow_delete' => true,
-                "attr" => array(
-                    "id" => 'tickets')
+
             ))
 
             ->add('Commander', SubmitType::class);

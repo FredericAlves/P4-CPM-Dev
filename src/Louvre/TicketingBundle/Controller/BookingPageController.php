@@ -31,9 +31,12 @@ class BookingPageController extends Controller
 
 
         $form = $this->createForm(BookingType::class, $booking);
+        $form->handleRequest($request);
 
+       // $session = $request->getSession();
+       // $session->set('booking', $booking);
 
-        if ($form->handleRequest($request)->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $dayOfTheWeekVisit = $booking->findDayOfTheWeek();
 
@@ -46,6 +49,10 @@ class BookingPageController extends Controller
               $em->persist($booking);
               $em->flush();
 
+
+
+
+
             return $this->redirectToRoute("louvre_ticketing_bookingsteptwopage", ['reservationCode' => $booking->getReservationCode()]);
 
         }
@@ -54,6 +61,8 @@ class BookingPageController extends Controller
             "dateOfPurchase" => $dateOfPurchase,
             "reservationCode" => $reservationCode,
             "id" => $id,
+            //"session" => $session,
+            "booking" => $booking,
             'form' => $form->createView()
         ]);
     }
@@ -78,20 +87,22 @@ class BookingPageController extends Controller
             $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
         }
 
-        $form = $this->createForm(BookingStepTwoType::class);
+        $form = $this->createForm(BookingStepTwoType::class,$booking);
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()){
 
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($booking);
+            $em->flush();
 
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($tickets[]);
-//            $em->flush();
-
- //           return $this->redirectToRoute("louvre_ticketing_homepage");
+            return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepthree.html.twig',[
+                "booking" => $booking,
+                            ]);
 
         }
 
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig',[
+           "booking" => $booking,
            "id" => $id,
            "dateOfVisit" => $dateOfVisit,
            "numberOfTickets" => $numberOfTickets,

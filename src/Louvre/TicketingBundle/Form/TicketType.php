@@ -21,7 +21,7 @@ class TicketType extends AbstractType
     {
         $builder
             ->add('lastname', TextType::class, ['label' => 'Nom'])
-            ->add('firstName', TextType::class, ['label' => 'Prénom'])
+            ->add('firstname', TextType::class, ['label' => 'Prénom'])
             ->add('birthDate', BirthdayType::class, array(
                 "label" => "Date de naissance",
                 "widget" => "single_text",

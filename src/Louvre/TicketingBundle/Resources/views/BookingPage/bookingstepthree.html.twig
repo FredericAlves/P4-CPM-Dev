@@ -1,0 +1,19 @@
+{% extends "LouvreTicketingBundle::layout.html.twig" %}
+
+{%  block body %}
+    <div id="tunnelAchat">
+        <ol class="tunnel">
+            <li></li>
+            <li></li>
+            <li>{% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingstepthreepage' %}class="is-current"{% endif %}></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    <div class="well">
+
+        {{ dump(booking) }}
+
+    </div>
+
+{% endblock %}

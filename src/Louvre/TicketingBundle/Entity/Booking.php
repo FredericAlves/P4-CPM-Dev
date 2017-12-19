@@ -90,10 +90,10 @@ class Booking
 
     public function __construct()
     {
-        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tickets = new ArrayCollection();
         $this->dateOfPurchase = new \DateTime();
         $this->reservationCode = $this->generateRandomReservationCode();
-        $this->tickets = new ArrayCollection();
+
     }
 
 
