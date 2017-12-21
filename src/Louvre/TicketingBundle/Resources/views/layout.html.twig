@@ -46,10 +46,19 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+
+
     <div id="header" class="jumbotron">
         <img src="{{ asset('bundles/louvreticketing/images/louvre-panorama.png') }}" alt="Louvre"  >
         <div class="center">Musée du Louvre</div>
 </div>
+
+{% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger">
+        {{ msg|trans }}
+    </div>
+{% endfor %}
 
 <div class="container-fluid text-center">
 
@@ -68,6 +77,8 @@
             {% block body %}
             {% endblock %}
 
+    {{ dump(booking) }}
+    {{ dump(session) }}
 </div>
 
 <footer>

@@ -10,3 +10,7 @@ louvre_ticketing_bookingsteponepage:
 louvre_ticketing_bookingsteptwopage:
     path:     /booking-step-two/{reservationCode}
     defaults: { _controller: LouvreTicketingBundle:BookingPage:bookingsteptwo }
+
+louvre_ticketing_bookingstepthreepage:
+    path:     /booking-step-three/{reservationCode}
+    defaults: { _controller: LouvreTicketingBundle:BookingPage:bookingstepthree }

@@ -25,13 +25,15 @@ class Booking
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="numberOfTickets", type="integer")
+     *
      * @Assert\Range(
      *     min = 1,
      *     max = 10,
      *     minMessage = "Il doit y avoir au moins un visiteur !",
      *     maxMessage = "Réservation possible pour 10 visiteurs maximum par commande !"
      * )
-     * @ORM\Column(name="numberOfTickets", type="integer")
      */
     private $numberOfTickets;
 
@@ -55,15 +57,19 @@ class Booking
      * @var \Date
      *
      * @ORM\Column(name="dateOfVisit", type="date")
-     * @Assert\GreaterThan("today", message = "La date doit être supérieure ou égale à la date du jour !")
+     *
+     * @Assert\Date()
+     * @Assert\GreaterThan("yesterday", message = "La date doit être supérieure ou égale à la date du jour !")
+     * @Assert\NotNull(message="Veuillez indiquer une date de visite.")
      */
     private $dateOfVisit;
 
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="duration", type="string", length=255)
+     * @ORM\Column(name="duration", type="boolean", nullable=false)
+     *
      */
     private $duration;
 
@@ -71,6 +77,10 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email(
+     *     message = "L'adresse '{{ value }}' n'est pas une adresse email valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 

@@ -47,9 +47,17 @@ class BookingType extends AbstractType
                 'choices'  => array(
                     'Journée' => true,
                     'Demi-journée' => false,
-                )))
+                ),
+
+                'multiple' => false,
+            ))
             ->add('numberOfTickets', IntegerType::class, array(
-                    "label" => "Nombre de visiteur(s) :"
+                    "label" => "Nombre de visiteur(s) :",
+                    "attr" => array(
+                        'value'=>'1',
+                        'min'=>'1',
+                        'max'=>'10'
+                    )
             ))
             ->add('Commander', SubmitType::class);
     }

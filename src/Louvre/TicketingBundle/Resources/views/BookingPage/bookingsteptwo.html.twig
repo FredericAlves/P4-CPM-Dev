@@ -21,15 +21,16 @@
 
 
 
-
+    <div class="well">
     {{ form_start(form) }}
 
 
     {% for visiteur in form.tickets %}
 
-        Billet n°: {{ loop.index }}
+        Visiteur n°: {{ loop.index }}
 
     <div class="form-group">
+        {{ form_errors(visiteur.lastname) }}
         {{ form_label(visiteur.lastname) }}
         {{ form_widget(visiteur.lastname) }}<br/>
     </div>
@@ -51,9 +52,10 @@
 
 
     {{ form_end(form) }}
+    </div>
 
 
-    {{ dump(booking) }}
+
 
     </div>
 
