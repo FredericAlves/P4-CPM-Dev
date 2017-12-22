@@ -3,7 +3,7 @@ namespace Louvre\TicketingBundle\Validator\constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Louvre\TicketingBundle\Services\bookingServices;
+use Louvre\TicketingBundle\Services\BookingUtilities;
 use Louvre\TicketingBundle\Entity\Booking;
 
 /**
@@ -11,7 +11,7 @@ use Louvre\TicketingBundle\Entity\Booking;
  */
 class areThereThousandTicketsSoldValidator extends ConstraintValidator
 {
-    public function __construct(BookingServices $bookingServices) {
+    public function __construct(BookingUtilities $bookingServices) {
         $this->bookingServices = $bookingServices;
     }
 

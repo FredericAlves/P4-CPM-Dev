@@ -5,7 +5,7 @@ use Louvre\TicketingBundle\Entity\Booking;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class BookingServices
+class BookingUtilities
 {
 
 
@@ -19,15 +19,12 @@ class BookingServices
     }
 
 
-    /**
-     * @param Booking $booking
-     */
-    public function beyondThirtyMinutes(Booking $booking)
+    public function underTenMinutes(Booking $booking)
     {
         $sessionOver = $booking->getDateOfPurchase();
         $now = new \DateTime();
         date_add($sessionOver, date_interval_create_from_date_string('1 minutes'));
-        if ($now > $sessionOver) {
+        if ($now < $sessionOver) {
             return true;
         }
     }
