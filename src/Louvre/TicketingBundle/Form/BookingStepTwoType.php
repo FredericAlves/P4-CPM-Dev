@@ -29,7 +29,7 @@ class BookingStepTwoType extends AbstractType
 
             ))
 
-            ->add('Commander', SubmitType::class);
+            ->add('Valider', SubmitType::class);
     }
     
     /**

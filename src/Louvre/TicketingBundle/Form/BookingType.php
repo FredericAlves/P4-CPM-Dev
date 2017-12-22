@@ -59,7 +59,7 @@ class BookingType extends AbstractType
                         'max'=>'10'
                     )
             ))
-            ->add('Commander', SubmitType::class);
+            ->add('Valider', SubmitType::class);
     }
     
     /**
