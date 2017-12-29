@@ -162,6 +162,43 @@ class BookingPageController extends Controller
     }
 
     public function bookingStepThreeAction(Request $request)
+{
+
+    $session = $request->getSession();
+
+    $bookingUtilities = $this->container->get('Louvre_Ticketing_Bundle.bookingUtilities');
+
+    if ($session->has('booking')) {
+
+
+        $booking = $session->get('booking');
+
+        if ($bookingUtilities->underTenMinutes($booking) == true) {
+
+            $tickets = $booking->getTickets();
+
+            $bill = 0;
+
+            foreach ($tickets as $ticket) {
+                $bill = $bill + $ticket->getPrice();
+            }
+
+            $booking->setBill($bill);
+
+            return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepthree.html.twig', [
+                "booking" => $booking,
+                "tickets" => $tickets,
+            ]);
+        } else {
+            $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
+            return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
+        }
+    } else {
+        return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
+    }
+}
+
+    public function bookingStepForAction(Request $request)
     {
 
         $session = $request->getSession();
@@ -173,19 +210,11 @@ class BookingPageController extends Controller
 
             $booking = $session->get('booking');
 
-            if ($bookingUtilities->underTenMinutes($booking) == true) {
+            $tickets = $booking->getTickets();
 
-                $tickets = $booking->getTickets();
 
-                $bill = 0;
 
-                foreach ($tickets as $ticket) {
-                    $bill = $bill + $ticket->getPrice();
-                }
-
-                $booking->setBill($bill);
-
-                return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepthree.html.twig', [
+                return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepfor.html.twig', [
                     "booking" => $booking,
                     "tickets" => $tickets,
                 ]);
@@ -193,10 +222,11 @@ class BookingPageController extends Controller
                 $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
                 return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
             }
-        } else {
-            return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
-        }
+
     }
+
+
+
 
     public function getBookingSession()
     {

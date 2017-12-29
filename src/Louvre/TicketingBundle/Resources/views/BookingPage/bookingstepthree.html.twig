@@ -27,29 +27,29 @@
                                 {% if visiteur.price == 8 %} moins de 12 ans {% endif %}
                                 {% if visiteur.price == 16 %} normal {% endif %}
                                 {% if visiteur.price == 12 %} plus de 60 ans {% endif %}<br/>
-        Prix du billet : {{ visiteur.price }},00 € <br/>
+        Prix du billet : {{ visiteur.price |number_format(2,',') }} € <br/>
 
     {% endfor %}
-        Le montant total de la commande s'élève à : {{ booking.bill }},00 € <br/>
+        Le montant total de la commande s'élève à : {{ booking.bill|number_format(2,',') }} € <br/>
         vos billets vous seront envoyés à l'adresse mail : {{ booking.email }}
     </div>
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Projet Stripe</span> Mentorat OpenClassroom</h1>
+                <h1><span>Paiement</span></h1>
             </div>
 
             <div id="status">
                 <p>
 
-                    Vous êtes sur le point de payer un article qui vaut une petite fortune ! {{ booking.bill }}
-                <form action="" method="POST">
+                    Vous êtes sur le point d'acheter {% if booking.numberOfTickets==1 %}votre billet{% endif %}{% if booking.numberOfTickets>1 %}vos billets{% endif %} pour un montant de {{ booking.bill|number_format(2,',') }} €
+                <form action="{{ path('louvre_ticketing_bookingstepforpage', {'reservationCode' : booking.reservationCode}) }}" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="pk_test_SFLHqbDMc5y77HUou43xRJLV"
                             data-amount="{{ booking.bill*100 }}"
-                            data-name="oc-stripe"
-                            data-description="Widget"
+                            data-name="Musée du Louvre"
+                            data-description="Paiement"
                             data-locale="auto"
                             data-currency="eur"
                             data-label="{{ 'Acheter'|trans }}">

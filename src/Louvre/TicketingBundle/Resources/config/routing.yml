@@ -14,3 +14,7 @@ louvre_ticketing_bookingsteptwopage:
 louvre_ticketing_bookingstepthreepage:
     path:     /booking-step-three/{reservationCode}
     defaults: { _controller: LouvreTicketingBundle:BookingPage:bookingstepthree }
+
+louvre_ticketing_bookingstepforpage:
+    path:     /booking-step-for/{reservationCode}
+    defaults: { _controller: LouvreTicketingBundle:BookingPage:bookingstepfor }
