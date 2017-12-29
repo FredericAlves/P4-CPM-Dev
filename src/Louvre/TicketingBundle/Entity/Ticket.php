@@ -22,7 +22,7 @@ class Ticket
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Louvre\TicketingBundle\Entity\Booking")
+     * @ORM\ManyToOne(targetEntity="Louvre\TicketingBundle\Entity\Booking", inversedBy="tickets"))
      * @ORM\JoinColumn(nullable=false)
      */
     private $booking;

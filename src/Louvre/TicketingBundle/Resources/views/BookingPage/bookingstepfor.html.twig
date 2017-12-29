@@ -7,7 +7,6 @@
             <li></li>
             <li></li>
             <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingstepforpage' %}class="is-current"{% endif %}></li>
-            <li></li>
         </ol>
     </div>
     <div class="well">
@@ -33,7 +32,7 @@
 
     {% endfor %}
         Le montant total de la commande s'élève à : {{ booking.bill|number_format(2,',') }} € <br/>
-        vos billets vous seront envoyés à l'adresse mail : {{ booking.email }}
+        vos billets sont envoyés à l'adresse mail : {{ booking.email }}
     </div>
 {% endblock %}
 

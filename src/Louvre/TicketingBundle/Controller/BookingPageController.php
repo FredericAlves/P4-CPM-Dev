@@ -209,8 +209,46 @@ class BookingPageController extends Controller
 
 
             $booking = $session->get('booking');
-
             $tickets = $booking->getTickets();
+
+            \Stripe\Stripe::setApiKey("sk_test_Ui8k9Iq57Y14p3TRj3cV6sSq");
+
+            // Get the credit card details submitted by the form
+            $token = $_POST['stripeToken'];
+
+            // Create a charge: this will charge the user's card
+            try {
+                $charge = \Stripe\Charge::create(array(
+                    "amount" => ($booking->getBill())*100, // Amount in cents
+                    "currency" => "eur",
+                    "source" => $token,
+                    "description" => "Musée du Louvre : ".$booking->getReservationCode(),
+                ));
+                $this->addFlash("success","Le paiement a bien été effectué !");
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($booking);
+                $em->flush();
+                $session->clear();
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject("Votre commande de billet(s) pour le Musée du Louvre")
+                    ->setFrom('contact@le-louvre.fr')
+                    ->setTo($booking->getEmail())
+                    ->setCharset('utf-8')
+                    ->setContentType('text/html');
+                $logo = $message->embed(\Swift_Image::fromPath('images/louvre_logo.jpg'));
+
+                $message
+                    ->setBody($this->renderView('LouvreTicketingBundle:EmailPage:email.html.twig', [
+                        'booking' => $booking,
+                        'tickets' => $tickets,
+                        'logo' => $logo,
+                    ]));
+
+                $this->get('mailer')->send($message);
+
+
 
 
 
@@ -218,6 +256,17 @@ class BookingPageController extends Controller
                     "booking" => $booking,
                     "tickets" => $tickets,
                 ]);
+            } catch(\Stripe\Error\Card $e) {
+
+                $this->addFlash("error","Un problème est survenu, veuillez rééssayer !");
+                return $this->redirectToRoute("louvre_ticketing_bookingstethreepage");
+                // The card has been declined
+            }
+
+
+
+
+
             } else {
                 $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
                 return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
