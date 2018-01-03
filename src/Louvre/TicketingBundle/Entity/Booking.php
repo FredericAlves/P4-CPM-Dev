@@ -4,6 +4,7 @@ namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Louvre\TicketingBundle\Validator\Constraints as BookingAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -26,7 +27,7 @@ class Booking
     /**
      * @var int
      *
-     * @ORM\Column(name="numberOfTickets", type="integer")
+     * @ORM\Column(name="numberOfTickets", type="integer", nullable=false)
      *
      * @Assert\Range(
      *     min = 1,
@@ -42,33 +43,38 @@ class Booking
     /**
      * @var int
      *
-     * @ORM\Column(name="bill", type="integer", nullable=true)
+     * @ORM\Column(name="bill", type="integer", nullable=false)
      */
     private $bill;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateOfPurchase", type="datetime")
+     * @ORM\Column(name="dateOfPurchase", type="datetime", nullable=false)
+     *
+     * @Assert\Date()
      */
     private $dateOfPurchase;
 
     /**
      * @var \Date
      *
-     * @ORM\Column(name="dateOfVisit", type="date")
+     * @ORM\Column(name="dateOfVisit", type="date", nullable=false)
      *
      * @Assert\Date()
      * @Assert\GreaterThan("yesterday", message = "La date doit être supérieure ou égale à la date du jour !")
      * @Assert\NotNull(message="Veuillez indiquer une date de visite.")
+     * @BookingAssert\areThereThousandTicketsSold()
      */
     private $dateOfVisit;
 
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="duration", type="boolean", nullable=false)
+     * @ORM\Column(name="duration", type="string", nullable=false)
+     *
+     * @Assert\Choice(choices={"journée", "demi-journée"}, message="Vous devez choisir une durée valide.")
      *
      */
     private $duration;
@@ -76,7 +82,8 @@ class Booking
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     *
      * @Assert\Email(
      *     message = "L'adresse '{{ value }}' n'est pas une adresse email valide.",
      *     checkMX = true
@@ -87,14 +94,19 @@ class Booking
     /**
      * @var string
      *
-     * @ORM\Column(name="reservationcode", type="string", length=255)
+     * @ORM\Column(name="reservationcode", type="string", length=255, nullable=false)
      */
     private $reservationCode;
+
+
 
     /**
      * @ORM\OneToMany(targetEntity="Louvre\TicketingBundle\Entity\Ticket", mappedBy="booking", cascade={"persist"})
      */
     private $tickets;
+
+
+
 
 
 

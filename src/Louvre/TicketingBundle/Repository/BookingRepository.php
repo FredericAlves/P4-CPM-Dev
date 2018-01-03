@@ -15,11 +15,32 @@ class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function getNumberOfTicketsForADate ($date) {
+        var_dump($date);
         return $this->createQueryBuilder('booking')
             ->select('SUM(booking.numberOfTickets) AS totalTickets')
             ->where('booking.dateOfVisit =:date')
-            ->setParameter('date', $date->format('Y-m-d'))
-            ->getQuery();
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getSingleScalarResult();
 
     }
+
+    public function findTicketsAllDays() {
+        return $this->createQueryBuilder('booking')
+            ->select('booking.dateOfVisit')
+            ->addSelect('SUM(booking.numberOfTickets) AS ticketsSum')
+            ->groupBy('booking.dateOfVisit')
+            ->getQuery()->getArrayResult();
+    }
+
+//    public function findDaysFull($max) {
+//        return $this->createQueryBuilder('booking')
+//            ->select('booking.dateOfVisit')
+//            ->addSelect('SUM(booking.numberOfTickets) AS totalTickets')
+//            ->groupBy('booking.dateOfVisit')
+//            ->where('totalTickets = :$max')
+//            ->getQuery();
+//    }
+
+
 }

@@ -1,9 +1,9 @@
 <?php
-namespace Louvre\TicketingBundle\Validator\constraints;
-
+namespace Louvre\TicketingBundle\Validator\Constraints;
+use Louvre\TicketingBundle\Service\BookingUtilities;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Louvre\TicketingBundle\Services\BookingUtilities;
+
 use Louvre\TicketingBundle\Entity\Booking;
 
 /**
@@ -11,19 +11,27 @@ use Louvre\TicketingBundle\Entity\Booking;
  */
 class areThereThousandTicketsSoldValidator extends ConstraintValidator
 {
-    public function __construct(BookingUtilities $bookingServices) {
-        $this->bookingServices = $bookingServices;
+    protected $bookingUtilities;
+
+    public function __construct(BookingUtilities $bookingUtilities) {
+        $this->bookingUtilities = $bookingUtilities;
     }
 
 
 
-    public function validate($value, Constraint $constraint)
+    public function validate($dateOfVisit, Constraint $constraint)
     {
-        $date = $value->get;
-        $ticketsSum = $this->bookingServices->totalNumberOfTickets($date);
-        if () {
-            $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ string }}', $value)
+
+        $daysOff = $this->bookingUtilities->getDaysOff();
+        $array = explode( ',', $daysOff );
+        var_dump('test');
+        foreach ($array as $dayOff)
+            var_dump($dayOff);
+//        if ($dateOfVisit == $daysOff) {
+            if (1 == 1) {
+
+                $this->context->buildViolation($constraint->message)
+//                ->setParameter('{{ date(\'d-m-Y\' }}', $dateOfVisit)
                 ->addViolation();
         }
     }

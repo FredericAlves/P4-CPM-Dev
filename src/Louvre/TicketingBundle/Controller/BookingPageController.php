@@ -5,11 +5,11 @@ namespace Louvre\TicketingBundle\Controller;
 use Louvre\TicketingBundle\Entity\Booking;
 use Louvre\TicketingBundle\Form\BookingStepTwoType;
 use Louvre\TicketingBundle\Form\BookingType;
-use Louvre\TicketingBundle\Services\BookingUtilities;
+use Louvre\TicketingBundle\Service\BookingUtilities;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
+
 
 
 
@@ -98,11 +98,14 @@ class BookingPageController extends Controller
                 $numberOfTickets = $booking->getNumberOfTickets();
 
 
-                $ticketsForTheDay = $em->getRepository('LouvreTicketingBundle:Booking')->findByDateOfVisit($dateOfVisit);
-                $totalTicketsForTheDay = 0;
-                foreach ($ticketsForTheDay as $ticketForTheDay) {
-                    $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
-                }
+                //$ticketsForTheDay = $em->getRepository('LouvreTicketingBundle:Booking')->findByDateOfVisit($dateOfVisit);
+
+                $ticketsForTheDay = $bookingUtilities->totalNumberOfTickets($booking);
+
+//                $totalTicketsForTheDay = 0;
+//                foreach ($ticketsForTheDay as $ticketForTheDay) {
+//                    $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
+//                }
 
                 $form = $this->createForm(BookingStepTwoType::class, $booking);
 
@@ -146,7 +149,7 @@ class BookingPageController extends Controller
                     "id" => $id,
                     "dateOfVisit" => $dateOfVisit,
                     "numberOfTickets" => $numberOfTickets,
-                    "totalTicketsForTheDay" => $totalTicketsForTheDay,
+                    "totalTicketsForTheDay" => $ticketsForTheDay,
                     'form' => $form->createView()
                 ]);
 
@@ -237,7 +240,7 @@ class BookingPageController extends Controller
                     ->setTo($booking->getEmail())
                     ->setCharset('utf-8')
                     ->setContentType('text/html');
-                $logo = $message->embed(\Swift_Image::fromPath('images/louvre_logo.jpg'));
+                $logo = $message->embed(\Swift_Image::fromPath('bundles/louvreticketing/images/louvre_logo.png'));
 
                 $message
                     ->setBody($this->renderView('LouvreTicketingBundle:EmailPage:email.html.twig', [

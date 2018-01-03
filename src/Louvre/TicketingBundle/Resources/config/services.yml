@@ -4,4 +4,17 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
     Louvre_Ticketing_Bundle.bookingUtilities:
-        class: Louvre\TicketingBundle\Services\BookingUtilities
+        class: Louvre\TicketingBundle\Service\BookingUtilities
+        arguments: ["@doctrine"]
+
+    Louvre_Ticketing_Bundle.bookingType:
+        class: Louvre\TicketingBundle\Form\BookingType
+        arguments: ["@Louvre_Ticketing_Bundle.bookingUtilities"]
+        tags:
+              - { name: form.type }
+
+    Louvre_Ticketing_Bundle.areThereThousandTicketsSold:
+        class: Louvre\TicketingBundle\Validator\Constraints\areThereThousandTicketsSoldValidator
+        arguments: ["@Louvre_Ticketing_Bundle.bookingUtilities"]
+        tags:
+              - { name: validator.constraint_validator }

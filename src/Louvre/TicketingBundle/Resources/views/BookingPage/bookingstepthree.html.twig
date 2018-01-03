@@ -19,7 +19,7 @@
         <br/>
 
     {% for visiteur in tickets %}
-        Visiteur n°: {{ loop.index }} <br/>
+        Visiteur n° {{ loop.index }} <br/>
         Nom : {{ visiteur.lastname }} {{ visiteur.firstname }}<br/>
         Catégorie de billet :   {% if visiteur.price == 10 %} réduit {% endif %}
                                 {% if visiteur.price == 0 %} moins de 4 ans {% endif %}
@@ -42,6 +42,7 @@
                 <p>
 
                     Vous êtes sur le point d'acheter {% if booking.numberOfTickets==1 %}votre billet{% endif %}{% if booking.numberOfTickets>1 %}vos billets{% endif %} pour un montant de {{ booking.bill|number_format(2,',') }} €
+
                 <form action="{{ path('louvre_ticketing_bookingstepforpage', {'reservationCode' : booking.reservationCode}) }}" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -51,9 +52,10 @@
                             data-description="Paiement"
                             data-locale="auto"
                             data-currency="eur"
-                            data-label="{{ 'Acheter'|trans }}">
+                            data-label="{{'Acheter'}}">
                     </script>
                 </form>
+
                 </p>
             </div>
         </div>
@@ -87,4 +89,10 @@
         .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
     }
 </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var reservation = '{{ booking.reservationCode }}';
+    </script>
 {% endblock %}

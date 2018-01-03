@@ -1,13 +1,15 @@
 <div>
+    <h1>Musée du Louvre</h1>
     <img src="{{ logo }}" alt="Logo du Louvre">
     <h2>Votre commande n°{{ booking.reservationCode }}</h2>
+    <h2>Date de votre visite {{ booking.dateOfVisit|date('d-m-Y') }}</h2>
+    <p></p>
     <p>Bonjour,</p>
-    <p>Merci pour votre commande, vous retrouvez votre ticket à la fin de cet e-mail.</p>
-    <p>Attention, cet e-mail fait office de ticket d'entrée.</p>
+    <p>Merci pour votre commande, attention, cet e-mail fait office de billet d'entrée.</p>
     <p>Si vous bénéficiez d'un prix réduit, pensez à présenter un justificatif.</p>
     <p>Merci et à bientôt au Musée du Louvre.</p>
 </div>
-
+<p></p>
 <div>
     <p>Votre billet pour le {{ booking.dateOfVisit|date('d-m-Y') }} :</p>
     <p>N° de commande : {{ booking.reservationCode }}</p>
@@ -20,7 +22,7 @@
             <th>Nom</th>
             <th>Prénom</th>
             <th>Tarif</th>
-            <th>Catégorie</th>
+            <th>Type de billet</th>
         </tr>
         </thead>
         <tbody>
@@ -28,8 +30,12 @@
             <tr>
                 <td>{{ ticket.lastName }}</td>
                 <td>{{ ticket.firstName }}</td>
-                <td>{{ ticket.price }}</td>
-                <td></td>
+                <td>{{ ticket.price }} €</td>
+                <td>{% if ticket.price == 10 %} réduit {% endif %}
+                    {% if ticket.price == 0 %} moins de 4 ans {% endif %}
+                    {% if ticket.price == 8 %} moins de 12 ans {% endif %}
+                    {% if ticket.price == 16 %} normal {% endif %}
+                    {% if ticket.price == 12 %} plus de 60 ans {% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
