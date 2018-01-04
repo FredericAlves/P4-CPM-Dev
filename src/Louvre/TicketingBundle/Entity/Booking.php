@@ -64,7 +64,7 @@ class Booking
      * @Assert\Date()
      * @Assert\GreaterThan("yesterday", message = "La date doit être supérieure ou égale à la date du jour !")
      * @Assert\NotNull(message="Veuillez indiquer une date de visite.")
-     * @BookingAssert\areThereThousandTicketsSold()
+     * @BookingAssert\isItClosedDay()
      */
     private $dateOfVisit;
 

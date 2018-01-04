@@ -13,8 +13,8 @@ services:
         tags:
               - { name: form.type }
 
-    Louvre_Ticketing_Bundle.areThereThousandTicketsSold:
-        class: Louvre\TicketingBundle\Validator\Constraints\areThereThousandTicketsSoldValidator
+    Louvre_Ticketing_Bundle.isItClosedDay:
+        class: Louvre\TicketingBundle\Validator\Constraints\isItClosedDayValidator
         arguments: ["@Louvre_Ticketing_Bundle.bookingUtilities"]
         tags:
               - { name: validator.constraint_validator }

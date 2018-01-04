@@ -9,7 +9,7 @@ use Louvre\TicketingBundle\Entity\Booking;
 /**
  * @Annotation
  */
-class areThereThousandTicketsSoldValidator extends ConstraintValidator
+class isItClosedDayValidator extends ConstraintValidator
 {
     protected $bookingUtilities;
 
@@ -21,19 +21,24 @@ class areThereThousandTicketsSoldValidator extends ConstraintValidator
 
     public function validate($dateOfVisit, Constraint $constraint)
     {
+        $dateOfVisit = date_format($dateOfVisit, 'd-m-Y');
 
         $daysOff = $this->bookingUtilities->getDaysOff();
-        $array = explode( ',', $daysOff );
-        var_dump('test');
-        foreach ($array as $dayOff)
-            var_dump($dayOff);
-//        if ($dateOfVisit == $daysOff) {
-            if (1 == 1) {
 
-                $this->context->buildViolation($constraint->message)
-//                ->setParameter('{{ date(\'d-m-Y\' }}', $dateOfVisit)
-                ->addViolation();
-        }
+        $daysOff = explode( ',', $daysOff );
+
+
+
+
+
+        foreach ($daysOff as $dayOff)
+
+                if ($dateOfVisit == $dayOff) {
+
+                        $this->context->buildViolation($constraint->message)
+        //                ->setParameter('{{ date(\'d-m-Y\' }}', $dateOfVisit)
+                        ->addViolation();
+                }
     }
 
 }

@@ -21,9 +21,9 @@ class BookingUtilities
     {
         $dateOfVisit = $booking->getDateOfVisit();
         $dateOfVisit = date_format($dateOfVisit, 'Y-m-d');
-        var_dump($dateOfVisit);
+
         $numberOfTicketsForADate = $this->em->getRepository('LouvreTicketingBundle:Booking')->getNumberOfTicketsForADate($dateOfVisit);
-        var_dump($numberOfTicketsForADate);
+
         return $numberOfTicketsForADate;
     }
 
@@ -74,7 +74,6 @@ class BookingUtilities
             $daysOff = $daysOff .','. $day;
         }
 
-        var_dump($daysOff);
 
         return $daysOff;
     }
