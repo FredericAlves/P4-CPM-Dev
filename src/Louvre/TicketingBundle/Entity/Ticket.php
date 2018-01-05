@@ -3,6 +3,7 @@
 namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ticket
@@ -31,35 +32,52 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\Column(name="category", type="string", length=255, nullable=false)
+     * @Assert\NotNull(message="une catégorie doit être choisie.")
      */
     private $category;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price", type="integer", nullable=true)
+     * @ORM\Column(name="price", type="integer", nullable=false)
+     * @Assert\NotNull(message="un prix doit être donné.")
      */
     private $price;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=255)
+     * @ORM\Column(name="lastName", type="string", length=255, nullable=false)
+     * @Assert\NotNull(message="Veuillez indiquer votre nom de famille.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 40,
+     *      minMessage = "Votre nom doit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $lastName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=255)
+     * @ORM\Column(name="firstName", type="string", length=255, nullable=false)
+     * @Assert\NotNull(message="Veuillez indiquer votre prénom.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 40,
+     *      minMessage = "Votre prénom doit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre prénom doit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $firstName;
 
     /**
      * @var \Date
      *
-     * @ORM\Column(name="birthDate", type="date")
+     * @ORM\Column(name="birthDate", type="date", nullable=false)
+     * @Assert\NotNull(message="Veuillez indiquer votre date de naissance.")
      */
     private $birthDate;
 

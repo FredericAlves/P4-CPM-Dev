@@ -59,6 +59,12 @@ footer {
 
 }
 
+#reduceAlert{
+    display: none;
+    background-color: #DADADA;
+    border-radius: 1%;
+}
+
 #accueil {
     text-align: center;
     width: 50%;
@@ -88,7 +94,8 @@ footer {
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 3em;
+    font-size: 4em;
+    font-weight: 500;
 }
 
 .image-jumbotron {

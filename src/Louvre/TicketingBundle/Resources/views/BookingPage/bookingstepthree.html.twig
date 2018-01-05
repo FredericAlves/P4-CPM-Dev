@@ -9,30 +9,31 @@
             <li></li>
         </ol>
     </div>
-    <div class="formulaire">
+    <div class="well">
 
 
         Récapitulatif de votre commande :
         <br/>
-        {{ booking.numberOfTickets }} billet(s) commandé(s) pour le {{ booking.dateOfVisit|date('d-m-Y') }}<br/>
+        <p><strong>{{ booking.numberOfTickets }}</strong> billet(s) commandé(s) pour le <strong>{{ booking.dateOfVisit|date('d-m-Y') }}</strong></p>
 
-        Visiteur(s) concerné(s) par cette commande :
+        <p>Visiteur(s) concerné(s) par cette commande :</p>
 
-        <br/>
 
     {% for visiteur in tickets %}
+        <div class="formulaire-step2">
         Visiteur n° {{ loop.index }} <br/>
-        Nom : {{ visiteur.lastname }} {{ visiteur.firstname }}<br/>
-        Catégorie de billet :   {% if visiteur.price == 10 %} réduit {% endif %}
-                                {% if visiteur.price == 0 %} moins de 4 ans {% endif %}
-                                {% if visiteur.price == 8 %} moins de 12 ans {% endif %}
-                                {% if visiteur.price == 16 %} normal {% endif %}
-                                {% if visiteur.price == 12 %} plus de 60 ans {% endif %}<br/>
-        Prix du billet : {{ visiteur.price |number_format(2,',') }} € <br/>
-
+        Nom : <B>{{ visiteur.lastname }} {{ visiteur.firstname }}</B><br/>
+        Catégorie de billet :   {% if visiteur.price == 10 %}<B> réduit </B>{% endif %}
+                                {% if visiteur.price == 0 %}<B> moins de 4 ans </B>{% endif %}
+                                {% if visiteur.price == 8 %}<B> moins de 12 ans </B>{% endif %}
+                                {% if visiteur.price == 16 %}<B> normal </B>{% endif %}
+                                {% if visiteur.price == 12 %}<B> plus de 60 ans </B>{% endif %}<br/>
+        Prix du billet : <B>{{ visiteur.price |number_format(2,',') }} € </B><br/>
+        </div>
     {% endfor %}
-        Le montant total de la commande s'élève à : {{ booking.bill|number_format(2,',') }} € <br/>
-        vos billets vous seront envoyés à l'adresse mail : {{ booking.email }}
+
+        <p>Le montant total de la commande s'élève à : <B>{{ booking.bill|number_format(2,',') }} €</B> </p>
+        vos billets vous seront envoyés à l'adresse mail : <B>{{ booking.email }}</B>
     </div>
     <div id="wrapper">
         <div id="container">

@@ -6,7 +6,10 @@
     <p></p>
     <p>Bonjour,</p>
     <p>Merci pour votre commande, attention, cet e-mail fait office de billet d'entrée.</p>
-    <p>Si vous bénéficiez d'un prix réduit, pensez à présenter un justificatif.</p>
+    {% for ticket in tickets %}
+        {% if ticket.price == 10 %}<p> il sera nécessaire de présenter sa carte d’étudiant, militaire ou équivalent lors de l’entrée pour prouver qu’on bénéficie bien d'un tarif réduit.</p> {% endif %}
+    {% endfor %}
+
     <p>Merci et à bientôt au Musée du Louvre.</p>
 </div>
 <p></p>
@@ -16,6 +19,8 @@
     <p>Prix total : {{ booking.bill }} €</p>
     <p>Quantité : {{ booking.numberOfTickets }} billet(s)</p>
     <p>durée : {{ booking.duration }}</p>
+
+
     <table>
         <thead>
         <tr>

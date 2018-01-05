@@ -38,7 +38,7 @@
                                         <div class="form-group">
                                             {{ form_errors(form.dateOfVisit) }}
                                             {{ form_label(form.dateOfVisit) }}<br/>
-                                            <p id="emailAlert">Les jours "grisés" ne sont pas disponible à la réservation</p>
+                                            <p id="emailAlert">Les jours "grisés" ne sont pas disponibles à la réservation</p>
                                             {{ form_widget(form.dateOfVisit) }}
                                         </div>
                                         <div class="form-group">
@@ -66,3 +66,10 @@
 
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/louvreticketing/plugin/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/louvreticketing/plugin/locales/bootstrap-datepicker.fr.min.js') }}"></script>
+    <script src="{{ asset('bundles/louvreticketing/js/14h.js') }}"></script>
+    <script src="{{ asset('bundles/louvreticketing/js/date.js') }}"></script>
+{% endblock %}

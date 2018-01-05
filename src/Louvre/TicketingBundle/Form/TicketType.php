@@ -35,7 +35,8 @@ class TicketType extends AbstractType
 
             ->add('category', CheckboxType::class, [
                 'label' => 'Tarif réduit :',
-                'required' => false
+                'required' => false,
+                "attr" => array("class" => "reduceCheckBox")
             ]);
 
     }

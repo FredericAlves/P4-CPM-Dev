@@ -9,30 +9,10 @@
             <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingstepforpage' %}class="is-current"{% endif %}></li>
         </ol>
     </div>
-    <div class="formulaire">
-        C'est payé !
-
-        Récapitulatif de votre commande :
+    <div class="well">
+        <B>Merci de votre commande !</B>
         <br/>
-        {{ booking.numberOfTickets }} billet(s) commandé(s) pour le {{ booking.dateOfVisit|date('d-m-Y') }}<br/>
-
-        Visiteur(s) concerné(s) par cette commande :
-
-        <br/>
-
-    {% for visiteur in tickets %}
-        Visiteur n°: {{ loop.index }} <br/>
-        Nom : {{ visiteur.lastname }} {{ visiteur.firstname }}<br/>
-        Catégorie de billet :   {% if visiteur.price == 10 %} réduit {% endif %}
-                                {% if visiteur.price == 0 %} moins de 4 ans {% endif %}
-                                {% if visiteur.price == 8 %} moins de 12 ans {% endif %}
-                                {% if visiteur.price == 16 %} normal {% endif %}
-                                {% if visiteur.price == 12 %} plus de 60 ans {% endif %}<br/>
-        Prix du billet : {{ visiteur.price |number_format(2,',') }} € <br/>
-
-    {% endfor %}
-        Le montant total de la commande s'élève à : {{ booking.bill|number_format(2,',') }} € <br/>
-        vos billets sont envoyés à l'adresse mail : {{ booking.email }}
+        vous allez recevoir vos billets à l'adresse mail indiquée : <B>{{ booking.email }}</B>
     </div>
 {% endblock %}
 

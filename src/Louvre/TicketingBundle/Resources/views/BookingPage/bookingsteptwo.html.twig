@@ -45,19 +45,19 @@
                 {{ form_errors(visiteur.category) }}
                 {{ form_label(visiteur.category) }}<br/>
                 {{ form_widget(visiteur.category) }}
+
             </div>
 
             </div>
 
         {% endfor %}
-
+    <p id="reduceAlert">il sera nécessaire de présenter sa carte d’étudiant, militaire ou équivalent lors de l’entrée pour prouver qu’on bénéficie bien d'un tarif réduit</p>
         {{ form_end(form) }}
 
 
+{% endblock %}
 
-
-
-
-
-
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/louvreticketing/js/reduce.js') }}"></script>
 {% endblock %}

@@ -83,7 +83,7 @@ class BookingUtilities
         $hour = $now ->format('H');
         $now = $now -> format('d-m-Y');
 
-        if ($hour >= 16) {
+        if ($hour >= 22) {
             $daysImpossibleToBook = $daysImpossibleToBook .','. $now;
         }
 
