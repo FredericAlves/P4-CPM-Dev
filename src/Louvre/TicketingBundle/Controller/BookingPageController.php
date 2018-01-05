@@ -5,7 +5,6 @@ namespace Louvre\TicketingBundle\Controller;
 use Louvre\TicketingBundle\Entity\Booking;
 use Louvre\TicketingBundle\Form\BookingStepTwoType;
 use Louvre\TicketingBundle\Form\BookingType;
-use Louvre\TicketingBundle\Service\BookingUtilities;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,6 +39,7 @@ class BookingPageController extends Controller
         $dateOfPurchase = $booking->getDateOfPurchase();
 
 
+
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
@@ -55,7 +55,7 @@ class BookingPageController extends Controller
 
 
 
-            //$this->addFlash('error', 'test message !');
+
 
             $this->setBookingSession($booking);
 
@@ -88,24 +88,18 @@ class BookingPageController extends Controller
 
             $booking = $session->get('booking');
 
-            if ($bookingUtilities->underTenMinutes($booking) == true) {
+            if ($bookingUtilities->sessionActive($booking) == true) {
 
 
-                $em = $this->getDoctrine()->getManager();
                 $id = $booking->getId();
                 $booking->addTickets($booking);
                 $dateOfVisit = $booking->getDateOfVisit();
                 $numberOfTickets = $booking->getNumberOfTickets();
+                $duration = $booking->getDuration();
 
-
-                //$ticketsForTheDay = $em->getRepository('LouvreTicketingBundle:Booking')->findByDateOfVisit($dateOfVisit);
 
                 $ticketsForTheDay = $bookingUtilities->totalNumberOfTickets($booking);
 
-//                $totalTicketsForTheDay = 0;
-//                foreach ($ticketsForTheDay as $ticketForTheDay) {
-//                    $totalTicketsForTheDay += $ticketForTheDay->getNumberOfTickets();
-//                }
 
                 $form = $this->createForm(BookingStepTwoType::class, $booking);
 
@@ -147,6 +141,7 @@ class BookingPageController extends Controller
                 return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig', [
                     "booking" => $booking,
                     "id" => $id,
+                    "duration" => $duration,
                     "dateOfVisit" => $dateOfVisit,
                     "numberOfTickets" => $numberOfTickets,
                     "totalTicketsForTheDay" => $ticketsForTheDay,
@@ -176,7 +171,7 @@ class BookingPageController extends Controller
 
         $booking = $session->get('booking');
 
-        if ($bookingUtilities->underTenMinutes($booking) == true) {
+        if ($bookingUtilities->sessionActive($booking) == true) {
 
             $tickets = $booking->getTickets();
 
@@ -206,7 +201,7 @@ class BookingPageController extends Controller
 
         $session = $request->getSession();
 
-        $bookingUtilities = $this->container->get('Louvre_Ticketing_Bundle.bookingUtilities');
+        //$bookingUtilities = $this->container->get('Louvre_Ticketing_Bundle.bookingUtilities');
 
         if ($session->has('booking')) {
 
@@ -291,7 +286,7 @@ class BookingPageController extends Controller
 
         if ($session->has('booking')) {
             $bookingSession = $session->get('booking');
-            if ($bookingUtilities->underTenMinutes($bookingSession)) {
+            if ($bookingUtilities->sessionActive($bookingSession)) {
                 return $bookingSession;
             } else {
                 $session->clear();

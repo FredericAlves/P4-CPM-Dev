@@ -46,7 +46,7 @@ class BookingType extends AbstractType
         $builder
 
             ->add('dateOfVisit', DateType::class, array(
-                "label" => "Date de votre visite:",
+                "label" => "Choisissez la date de votre visite:",
                 "widget" => "single_text",
                 'format' => 'dd-MM-yyyy',
                 "placeholder" => "Choisissez une date",
@@ -56,16 +56,16 @@ class BookingType extends AbstractType
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
                     'data-date-days-of-week-disabled' => '02',
-                    'data-date-today-highlight' => 'true',
+                    'data-date-today-highlight' => 'false',
                     'data-date-language' => 'fr',
                     'data-date-start-date' => "0d",
                     'data-date-end-date' => '+364d',
-                    'data-date-dates-disabled' => $this->bookingUtilities->getDaysOff(),
+                    'data-date-dates-disabled' => $this->bookingUtilities->getDaysImpossibleToBook(),
                     'data-date-autoclose' => true
                            )
             ))
             ->add('email', EmailType::class, array(
-                'label' => 'Votre adresse mail :'
+                'label' => 'Entrez votre adresse mail :'
             ))
             ->add('duration', ChoiceType::class, array(
                 'label' => 'Billet(s) "Journée" ou "demi-journée" :',

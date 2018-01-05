@@ -9,7 +9,7 @@ use Louvre\TicketingBundle\Entity\Booking;
 /**
  * @Annotation
  */
-class isItClosedDayValidator extends ConstraintValidator
+class daysImpossibleToBookValidator extends ConstraintValidator
 {
     protected $bookingUtilities;
 
@@ -23,17 +23,17 @@ class isItClosedDayValidator extends ConstraintValidator
     {
         $dateOfVisit = date_format($dateOfVisit, 'd-m-Y');
 
-        $daysOff = $this->bookingUtilities->getDaysOff();
+        $daysImpossibleToBook = $this->bookingUtilities->getDaysImpossibleToBook();
 
-        $daysOff = explode( ',', $daysOff );
-
-
+        $daysImpossibleToBook = explode( ',', $daysImpossibleToBook );
 
 
 
-        foreach ($daysOff as $dayOff)
 
-                if ($dateOfVisit == $dayOff) {
+
+        foreach ($daysImpossibleToBook as $dayImpossibleToBook)
+
+                if ($dateOfVisit == $dayImpossibleToBook) {
 
                         $this->context->buildViolation($constraint->message)
         //                ->setParameter('{{ date(\'d-m-Y\' }}', $dateOfVisit)

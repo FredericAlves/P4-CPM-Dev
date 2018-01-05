@@ -1,5 +1,5 @@
 
-    /* Remove the navbar's default margin-bottom and rounded borders */
+/* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -20,6 +20,43 @@ footer {
     background-color: #555;
     color: white;
     padding: 15px;
+}
+
+#form-step-one{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.formulaire {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+.formulaire-step2 {
+    display: inline-block;
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+#emailAlert {
+    background-color: #DADADA;
+    border-radius: 1%;
+
+
+
 }
 
 #accueil {
@@ -47,22 +84,52 @@ footer {
 }
 
 .center {
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 3em;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
 }
 
-img {
-        width: 100%;
-        height: auto;
+.image-jumbotron {
+    width: 100%;
+    height: auto;
 
 }
+
+#fleche {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fleche-gauche {
+    float: left;
+    display: inline;
+    margin-left: 0px;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.fleche-gauche:hover {
+    margin-left: -30px;
+
+}
+
+.fleche-droite {
+    float: right;
+    margin-right: 0px;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.fleche-droite:hover {
+    margin-right: -30px;
+}
+
 
 #louvre_ticketingbundle_booking_dateOfVisit {
     text-align: center;
-    width: 15%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -72,7 +139,31 @@ img {
     width: 15%;
     margin-left: auto;
     margin-right: auto;
-    }
+}
+
+/* ********************************************************************* */
+
+/* *** apparence d'un select quand on simule un readonly *************** */
+
+/* ********************************************************************* */
+
+select.readonly {
+
+    -webkit-appearance: none;
+
+    -moz-appearance: none;
+
+    text-indent: 1px;
+
+    border: none;
+
+    color: #333333;
+
+    position: relative;
+
+    left: -2px;
+
+}
 
 .navbar-default {
     background-color: #2e3436;
@@ -95,64 +186,66 @@ img {
     color: red;
 
 }
-    .footer {
-        background: #222222 none repeat scroll 0 0;
-        border-top: 4px solid #999;
-        margin: 0;
-        padding: 20px 0;
-    }
-    .footer_dv {
-        width: 100%;
-    }
-    .footer_dv h4 {
-        color: white;
-        font-family: roboto;
-        font-weight: bold;
-        margin-bottom: 30px;
-        text-transform: uppercase;
-    }
-    .footer_dv ul {
-        list-style: outside none none;
-        margin: 0;
-        padding: 0;
-    }
-    .footer_dv ul li:first-child {
-        border-top: medium none;
-        box-shadow: none;
-    }
-    .footer_dv ul li {
-        border-top: 1px solid #000;
-        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.2);
-        color: #f1f2f2;
-        padding: 5px 0;
-    }
-    .footer_dv p {
-        color: #f5f5f5;
-        font-size: 14px;
-        line-height: 20px;
-        margin: 0 0 15px;
-        text-align: justify;
-    }
+.footer {
+    background: #222222 none repeat scroll 0 0;
+    border-top: 4px solid #999;
+    margin: 0;
+    padding: 20px 0;
+}
+.footer_dv {
+    width: 100%;
+}
+.footer_dv h4 {
+    color: white;
+    font-family: roboto;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+.footer_dv ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.footer_dv ul li:first-child {
+    border-top: medium none;
+    box-shadow: none;
+}
+.footer_dv ul li {
+    border-top: 1px solid #000;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.2);
+    color: #f1f2f2;
+    padding: 5px 0;
+}
+.footer_dv p {
+    color: #f5f5f5;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0 15px;
+    text-align: justify;
+}
 
-    .footer_dv a {
-        color: #f5f5f5;
-        font-size: 14px;
-        line-height: 20px;
-        margin: 0 0 15px;
-        text-align: justify;
-    }
+.footer_dv a {
+    color: #f5f5f5;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0 15px;
+    text-align: justify;
+}
 
-    .datepicker table tr td.new, .datepicker table tr td.old{
-        opacity: 0.4;
-        color: black;
-    }
-    .datepicker table tr td.disabled{
-        background: rgba(218,218,218,0.8);
+.datepicker table tr td.new, .datepicker table tr td.old{
+    opacity: 0.4;
+    color: black;
+}
+.datepicker table tr td.disabled{
+    background: rgba(218,218,218,0.8);
 
-    }
-    .datepicker table tr td.disabled, .datepicker table tr td.active, .datepicker table tr td.active:hover{
-        border-radius: 2%;
-    }
+}
+.datepicker table tr td.disabled, .datepicker table tr td.active, .datepicker table tr td.active:hover{
+    border-radius: 2%;
+}
+
+
 
 
 
@@ -166,7 +259,6 @@ img {
 
     #louvre_ticketingbundle_booking_dateOfVisit {
         text-align: center;
-        width: 50%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -193,15 +285,18 @@ img {
         margin-bottom :10px;
     }
 
-    img{
+    .image-jumbotron{
 
         height: 100%;
     }
     .center {
+        display: none;
         position: absolute;
         top: 15%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 2em;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

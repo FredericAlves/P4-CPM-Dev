@@ -9,53 +9,55 @@
             <li></li>
         </ol>
     </div>
-    <div class="well">
-        Reservation
-
-        Id de la transaction : {{ id }} <br/>
-        Nombre de visiteurs : <div id="numberOfTickets">{{ numberOfTickets }}</div> <br/>
-        Date de la visite : {{ dateOfVisit|date('d-m-Y') }} <br/>
-        Nombre de billets total vendus pour ce jour : {{ totalTicketsForTheDay}}
 
 
 
-
-    <div class="well">
-    {{ form_start(form) }}
-
-
-    {% for visiteur in form.tickets %}
-
-        Visiteur n°: {{ loop.index }}
-
-    <div class="form-group">
-        {{ form_errors(visiteur.lastname) }}
-        {{ form_label(visiteur.lastname) }}
-        {{ form_widget(visiteur.lastname) }}<br/>
-    </div>
-    <div class="form-group">
-        {{ form_label(visiteur.firstname) }}
-        {{ form_widget(visiteur.firstname) }}<br/>
-    </div>
-    <div class="form-group">
-        {{ form_label(visiteur.birthDate) }}
-        {{ form_widget(visiteur.birthDate) }}<br/>
-    </div>
-    <div class="form-group">
-        {{ form_label(visiteur.category) }}
-        {{ form_widget(visiteur.category) }}
-    </div>
-
-    {% endfor %}
+    Date de votre visite : <span style="font-weight: 700">{{ dateOfVisit|date('d-m-Y') }}</span> <br/>
+    Nombre de visiteurs : <span style="font-weight: 700">{{ numberOfTickets }}</span> <br/>
+    Type de Billet  : <span style="font-weight: 700">{{ duration }} </span><br/>
 
 
 
-    {{ form_end(form) }}
-    </div>
+        {{ form_start(form) }}
+
+
+        {% for visiteur in form.tickets %}
+
+            <div class="formulaire-step2">
+
+<div class="form-group">Visiteur n° <span style="font-weight: 700"> {{ loop.index }} </span></div>
+            <div class="form-group">
+                {{ form_errors(visiteur.lastname) }}
+                {{ form_label(visiteur.lastname) }}<br/>
+                {{ form_widget(visiteur.lastname) }}<br/>
+            </div>
+            <div class="form-group">
+                {{ form_errors(visiteur.firstname) }}
+                {{ form_label(visiteur.firstname) }}<br/>
+                {{ form_widget(visiteur.firstname) }}<br/>
+            </div>
+            <div class="form-group">
+                {{ form_errors(visiteur.birthDate) }}
+                {{ form_label(visiteur.birthDate) }}<br/>
+                {{ form_widget(visiteur.birthDate) }}<br/>
+            </div>
+            <div class="form-group">
+                {{ form_errors(visiteur.category) }}
+                {{ form_label(visiteur.category) }}<br/>
+                {{ form_widget(visiteur.category) }}
+            </div>
+
+            </div>
+
+        {% endfor %}
+
+        {{ form_end(form) }}
 
 
 
 
-    </div>
+
+
+
 
 {% endblock %}

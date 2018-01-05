@@ -49,9 +49,9 @@
 
 
 
-    <div id="header" class="jumbotron">
-        <img src="{{ asset('bundles/louvreticketing/images/louvre-panorama.png') }}" alt="Louvre"  >
-        <div class="center">Musée du Louvre</div>
+<div class="jumbotron">
+    <img src="{{ asset('bundles/louvreticketing/images/louvre-panorama.png') }}" alt="Louvre" class="image-jumbotron" >
+    <div class="center">Musée du Louvre</div>
 </div>
 
 {% for msg in app.session.flashBag.get('error') %}
@@ -138,7 +138,7 @@
     <script src="{{ asset('bundles/louvreticketing/plugin/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('bundles/louvreticketing/plugin/locales/bootstrap-datepicker.fr.min.js') }}"></script>
     <script src="{{ asset('bundles/louvreticketing/js/main.js') }}"></script>
-
+    <script src="{{ asset('bundles/louvreticketing/js/14h.js') }}"></script>
     <script src="{{ asset('bundles/louvreticketing/js/date.js') }}"></script>
 
 {% endblock %}

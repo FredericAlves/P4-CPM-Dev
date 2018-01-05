@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class isItClosedDay extends Constraint
+class daysImpossibleToBook extends Constraint
 {
     public $message = 'Vous ne pouvez pas réserver de billets pour cette date !';
 }

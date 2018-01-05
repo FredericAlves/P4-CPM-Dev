@@ -25,18 +25,20 @@
                         <li></li>
                 </ol>
         </div>
-        <div class="well">
+  <!--
+    <div id="fleche">
+        <a href="{{ path('louvre_ticketing_bookingsteponepage', {'reservationCode' : booking.reservationCode}) }}"><div><img src="{{ asset('bundles/louvreticketing/images/fleche-gauche.png') }}" alt="Louvre" class="fleche-gauche" title="étape précédente"></div></a><a href="{{ path('louvre_ticketing_bookingsteponepage', {'reservationCode' : booking.reservationCode}) }}"><div><img src="{{ asset('bundles/louvreticketing/images/fleche-droite.png') }}" alt="Louvre" class="fleche-droite" title="étape suivante"></div></a><br/>
+    </div>
+    -->
 
 
-            <!-- <p> date de reservation : {{ dateOfPurchase |date("d/m/Y")}} </p> -->
-
-
-
+    <div class="formulaire">
                                 {{ form_start(form) }}
 
                                         <div class="form-group">
                                             {{ form_errors(form.dateOfVisit) }}
-                                            {{ form_label(form.dateOfVisit) }}
+                                            {{ form_label(form.dateOfVisit) }}<br/>
+                                            <p id="emailAlert">Les jours "grisés" ne sont pas disponible à la réservation</p>
                                             {{ form_widget(form.dateOfVisit) }}
                                         </div>
                                         <div class="form-group">
@@ -52,6 +54,7 @@
                                         <div class="form-group">
                                             {{ form_errors(form.email) }}
                                             {{ form_label(form.email) }}<br/>
+                                            <p id="emailAlert">attention vos billets vous seront envoyés à cette adresse</p>
                                             {{ form_widget(form.email) }}
                                         </div>
 
