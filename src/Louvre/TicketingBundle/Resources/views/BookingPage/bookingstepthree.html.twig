@@ -14,7 +14,8 @@
 
         Récapitulatif de votre commande :
         <br/>
-        <p><strong>{{ booking.numberOfTickets }}</strong> billet(s) commandé(s) pour le <strong>{{ booking.dateOfVisit|date('d-m-Y') }}</strong></p>
+        <p><strong>{{ booking.numberOfTickets }}</strong> billet(s) commandé(s) pour le :</p>
+        <p><strong>{{ booking.dateOfVisit|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</strong></p>
 
         <p>Visiteur(s) concerné(s) par cette commande :</p>
 
@@ -31,6 +32,10 @@
         Prix du billet : <B>{{ visiteur.price |number_format(2,',') }} € </B><br/>
         </div>
     {% endfor %}
+
+        {% for visiteur in tickets %}
+        {% if visiteur.price == 10 %}<p><B> il sera nécessaire que monsieur ou madame, <B>{{ visiteur.lastname }} {{ visiteur.firstname }}</B>, présente sa carte d’étudiant, militaire ou équivalent lors de l’entrée pour justifier du tarif réduit</B></p>{% endif %}
+        {% endfor %}
 
         <p>Le montant total de la commande s'élève à : <B>{{ booking.bill|number_format(2,',') }} €</B> </p>
         vos billets vous seront envoyés à l'adresse mail : <B>{{ booking.email }}</B>
@@ -95,7 +100,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        var reservation = '{{ booking.reservationCode }}';
-    </script>
+
 {% endblock %}

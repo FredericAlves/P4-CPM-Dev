@@ -102,7 +102,7 @@ class BookingUtilities
 
         $sessionStarted = $sessionStarted->format('d-m-Y H:i:s');
 
-        $sessionEnded = new \DateTime(date('d-m-Y H:i:s',strtotime('+5 minutes',strtotime($sessionStarted))));
+        $sessionEnded = new \DateTime(date('d-m-Y H:i:s',strtotime('+10 minutes',strtotime($sessionStarted))));
 
         $now = new \DateTime();
 

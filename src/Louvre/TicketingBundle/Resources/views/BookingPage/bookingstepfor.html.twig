@@ -10,9 +10,11 @@
         </ol>
     </div>
     <div class="well">
-        <B>Merci de votre commande !</B>
-        <br/>
-        vous allez recevoir vos billets à l'adresse mail indiquée : <B>{{ booking.email }}</B>
+        <p><B>Merci de votre commande !</B></p>
+
+        <p>vous allez recevoir vos billets à l'adresse mail indiquée : <B>{{ booking.email }}</B></p>
+
+        <p><a href="{{ path('louvre_ticketing_homepage') }}" class="btn btn-info" role="button" title="Lien 1">Revenir à l'accueil</a></p>
     </div>
 {% endblock %}
 

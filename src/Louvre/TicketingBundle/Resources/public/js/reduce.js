@@ -5,7 +5,11 @@ $(function ($) {
 
 
     $reduceCheckBox.change(function () {
-        $('#reduceAlert').show();
+        if ($reduceCheckBox.is(':checked')) {
+            $('#reduceAlert').show();
+        } else {
+            $('#reduceAlert').hide();
+        }
     })
 });
 

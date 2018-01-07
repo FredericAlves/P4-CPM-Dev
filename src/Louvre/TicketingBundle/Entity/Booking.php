@@ -86,7 +86,7 @@ class Booking
      *
      * @Assert\Email(
      *     message = "L'adresse '{{ value }}' n'est pas une adresse email valide.",
-     *     checkMX = true
+     *     checkMX = false
      * )
      */
     private $email;

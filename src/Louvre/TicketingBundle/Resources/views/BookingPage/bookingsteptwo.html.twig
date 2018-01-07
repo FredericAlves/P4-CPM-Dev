@@ -12,11 +12,12 @@
 
 
 
-    Date de votre visite : <span style="font-weight: 700">{{ dateOfVisit|date('d-m-Y') }}</span> <br/>
+    <p>Date de votre visite : <br/>
+    <span style="font-weight: 700">{{ booking.dateOfVisit|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</span><br/>
     Nombre de visiteurs : <span style="font-weight: 700">{{ numberOfTickets }}</span> <br/>
-    Type de Billet  : <span style="font-weight: 700">{{ duration }} </span><br/>
+    Type de Billet  : <span style="font-weight: 700">{{ duration }} </span><br/></p>
 
-
+    <p><i>Tarifs : 0->4 ans = gratuit, 4->12 ans = 8€, 12->60 ans (tarif normal) = 16€, +60 ans = 12€, réduit = 10€ </i></p>
 
         {{ form_start(form) }}
 
@@ -53,6 +54,7 @@
         {% endfor %}
     <p id="reduceAlert">il sera nécessaire de présenter sa carte d’étudiant, militaire ou équivalent lors de l’entrée pour prouver qu’on bénéficie bien d'un tarif réduit</p>
         {{ form_end(form) }}
+
 
 
 {% endblock %}

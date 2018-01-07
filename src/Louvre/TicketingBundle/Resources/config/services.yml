@@ -18,3 +18,4 @@ services:
         arguments: ["@Louvre_Ticketing_Bundle.bookingUtilities"]
         tags:
               - { name: validator.constraint_validator }
+

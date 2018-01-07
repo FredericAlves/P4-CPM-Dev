@@ -2,6 +2,14 @@
 
 {%  block body %}
     <h1>Bienvenue sur la billetterie du musée du Louvre</h1>
+    <div id="tunnelAchat" xmlns="http://www.w3.org/1999/html">
+        <ol class="tunnel">
+            <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingsteponepage' %}class="is-current"{% endif %}></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
         <div id="contraintes">
             <p>
                 Le musée est ouvert tout les jours, de 9h à 18h, sauf le mardi (Fermeture hebdomadaire) et les 1er mai, 1er novembre et 25 décembre.<br/>
@@ -17,19 +25,8 @@
             </p>
         </div>
 
-        <div id="tunnelAchat" xmlns="http://www.w3.org/1999/html">
-                <ol class="tunnel">
-                        <li {% if app.request.attributes.get('_route') == 'louvre_ticketing_bookingsteponepage' %}class="is-current"{% endif %}></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                </ol>
-        </div>
-  <!--
-    <div id="fleche">
-        <a href="{{ path('louvre_ticketing_bookingsteponepage', {'reservationCode' : booking.reservationCode}) }}"><div><img src="{{ asset('bundles/louvreticketing/images/fleche-gauche.png') }}" alt="Louvre" class="fleche-gauche" title="étape précédente"></div></a><a href="{{ path('louvre_ticketing_bookingsteponepage', {'reservationCode' : booking.reservationCode}) }}"><div><img src="{{ asset('bundles/louvreticketing/images/fleche-droite.png') }}" alt="Louvre" class="fleche-droite" title="étape suivante"></div></a><br/>
-    </div>
-    -->
+
+
 
 
     <div class="formulaire">
@@ -38,7 +35,7 @@
                                         <div class="form-group">
                                             {{ form_errors(form.dateOfVisit) }}
                                             {{ form_label(form.dateOfVisit) }}<br/>
-                                            <p id="emailAlert">Les jours "grisés" ne sont pas disponibles à la réservation</p>
+                                            <p id="emailAlert">Les jours "grisés" ne sont pas disponibles à la réservation, voir informations ci-dessus</p>
                                             {{ form_widget(form.dateOfVisit) }}
                                         </div>
                                         <div class="form-group">
@@ -54,7 +51,7 @@
                                         <div class="form-group">
                                             {{ form_errors(form.email) }}
                                             {{ form_label(form.email) }}<br/>
-                                            <p id="emailAlert">attention vos billets vous seront envoyés à cette adresse</p>
+                                            <p id="emailAlert">attention, vos billets vous seront envoyés à cette adresse</p>
                                             {{ form_widget(form.email) }}
                                         </div>
 
