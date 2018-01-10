@@ -195,7 +195,7 @@ class Ticket
     /**
      * get birthDate
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getBirthDate()
     {

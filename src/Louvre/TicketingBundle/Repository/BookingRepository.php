@@ -15,7 +15,7 @@ class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function getNumberOfTicketsForADate ($date) {
-        var_dump($date);
+
         return $this->createQueryBuilder('booking')
             ->select('SUM(booking.numberOfTickets) AS totalTickets')
             ->where('booking.dateOfVisit =:date')

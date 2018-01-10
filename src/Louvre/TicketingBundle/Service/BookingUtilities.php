@@ -67,7 +67,7 @@ class BookingUtilities
             $daysFull = [];
 
                 foreach ($ticketsAllDays as $ticketAllDay => $value){
-                    if ($value["ticketsSum"] >= 2){
+                    if ($value["ticketsSum"] >= 3){
                         $daysFull[] = $value["dateOfVisit"]->format('d-m-Y');
                     }
 
