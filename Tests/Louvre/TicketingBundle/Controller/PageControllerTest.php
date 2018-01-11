@@ -66,7 +66,7 @@ class PageControllerTest extends WebTestCase
 
         $crawler= $client->reload();
 
-        echo $client->getResponse()->getContent();
+        //echo $client->getResponse()->getContent();
 
         $this->assertSame(1,$crawler->filter('html:contains("Vous ne pouvez pas réserver de billets pour cette date !")')->count());
 
@@ -99,15 +99,12 @@ class PageControllerTest extends WebTestCase
         $form['louvre_ticketingbundle_bookingsteptwo[tickets][0][birthDate][month]'] = 06;
         $form['louvre_ticketingbundle_bookingsteptwo[tickets][0][birthDate][year]'] = 1970;
         //$form['louvre_ticketingbundle_bookingsteptwo[tickets][0][category]'] = null;
-        //$form['louvre_ticketingbundle_bookingsteptwo[tickets][0][category]'] = 1;
+        $form['louvre_ticketingbundle_bookingsteptwo[tickets][0][category]'] = 1;
 
         $client->submit($form);
 
         $crawler= $client->followRedirect();
 
-        echo $client->getResponse()->getContent();
-
-        //$this->assertSame(1,$crawler->filter('#reduceAlert style:contains("display: block;")')->count());
         $this->assertSame(1,$crawler->filter('html:contains("il sera nécessaire que monsieur ou madame,")')->count());
     }
 }

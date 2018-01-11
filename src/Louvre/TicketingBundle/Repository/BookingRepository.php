@@ -33,14 +33,7 @@ class BookingRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()->getArrayResult();
     }
 
-//    public function findDaysFull($max) {
-//        return $this->createQueryBuilder('booking')
-//            ->select('booking.dateOfVisit')
-//            ->addSelect('SUM(booking.numberOfTickets) AS totalTickets')
-//            ->groupBy('booking.dateOfVisit')
-//            ->where('totalTickets = :$max')
-//            ->getQuery();
-//    }
+
 
 
 }

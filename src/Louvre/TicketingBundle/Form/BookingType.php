@@ -52,7 +52,7 @@ class BookingType extends AbstractType
                 "placeholder" => "Choisissez une date",
                 "attr" => array(
                     "class" => "form-control input-inline datepicker",
-                    //'readonly'=>'readonly',
+                    'readonly'=>'readonly',
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy',
                     'data-date-days-of-week-disabled' => '02',

@@ -97,10 +97,6 @@ class BookingPageController extends Controller
                 $numberOfTickets = $booking->getNumberOfTickets();
                 $duration = $booking->getDuration();
 
-
-                $ticketsForTheDay = $bookingUtilities->totalNumberOfTickets($booking);
-
-
                 $form = $this->createForm(BookingStepTwoType::class, $booking);
 
                 if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
@@ -144,7 +140,6 @@ class BookingPageController extends Controller
                     "duration" => $duration,
                     "dateOfVisit" => $dateOfVisit,
                     "numberOfTickets" => $numberOfTickets,
-                    "totalTicketsForTheDay" => $ticketsForTheDay,
                     'form' => $form->createView()
                 ]);
 

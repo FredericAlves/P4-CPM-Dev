@@ -2,6 +2,7 @@
 namespace Louvre\TicketingBundle\Service;
 
 use Louvre\TicketingBundle\Entity\Booking;
+use Doctrine\ORM\Mapping as ORM;
 
 
 

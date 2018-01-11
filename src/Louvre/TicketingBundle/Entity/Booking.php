@@ -74,7 +74,7 @@ class Booking
      *
      * @ORM\Column(name="duration", type="string", nullable=false)
      *
-     * @Assert\Choice(choices={"journée", "demi-journée"}, message="Vous devez choisir une durée valide.")
+     * @Assert\Choice(choices={"journée", "demi-journée"}, message="Vous devez choisir une durée valide.", strict=true)
      *
      */
     private $duration;
