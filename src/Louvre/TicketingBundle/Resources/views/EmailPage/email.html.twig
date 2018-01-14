@@ -10,7 +10,7 @@
     <img src="{{ logo }}" alt="Logo du Louvre">
     <h1>Musée du Louvre</h1>
     <p></p>
-    <h2>Votre commande de billet(s) pour le <strong>{{ booking.dateOfVisit|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</strong></h2>
+    <h2>Votre commande de {% if booking.numberOfTickets==1 %}billet{% endif %}{% if booking.numberOfTickets>1 %}billets{% endif %} pour le <strong>{{ booking.dateOfVisit|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</strong></h2>
     <h2>Commande n° {{ booking.reservationCode }}</h2>
     <p></p>
     <p>Bonjour,</p>
@@ -33,7 +33,7 @@
     <p>{% if booking.numberOfTickets==1 %}votre billet{% endif %}{% if booking.numberOfTickets>1 %}vos billets{% endif %} pour le <strong>{{ booking.dateOfVisit|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</strong> :</p>
     <p>N° de commande : {{ booking.reservationCode }}</p>
     <p>Prix total : {{ booking.bill }} €</p>
-    <p>Quantité : {{ booking.numberOfTickets }} billet(s)</p>
+    <p>Quantité : {{ booking.numberOfTickets }} {% if booking.numberOfTickets==1 %}billet{% endif %}{% if booking.numberOfTickets>1 %}billets{% endif %}</p>
     <p>durée : {{ booking.duration }}</p>
 
 
@@ -47,7 +47,7 @@
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.05);">
-            Visiteur n° {{ loop.index }} <br/>
+            {% if booking.numberOfTickets>1 %}Visiteur n° {{ loop.index }} <br/> {% endif %}
             Nom : <B>{{ visiteur.lastname }} {{ visiteur.firstname }}</B><br/>
             Catégorie de billet :   {% if visiteur.price == 10 %}<B> réduit </B>{% endif %}
             {% if visiteur.price == 0 %}<B> moins de 4 ans </B>{% endif %}

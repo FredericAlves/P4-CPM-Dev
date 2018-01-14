@@ -73,7 +73,7 @@ class BookingType extends AbstractType
                 'multiple' => false,
             ))
             ->add('numberOfTickets', IntegerType::class, array(
-                    "label" => "Nombre de visiteur(s) :",
+                    "label" => "Nombre de visiteurs (10 maximum) :",
                     "attr" => array(
                         'value'=>'1',
                         'min'=>'1',

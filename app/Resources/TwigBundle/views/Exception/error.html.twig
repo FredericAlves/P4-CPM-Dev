@@ -74,8 +74,17 @@
     {% endfor %}
 
 
-            {% block body %}
-            {% endblock %}
+
+    {% block body %}
+        <h1>Page non trouvée</h1>
+
+        <p>
+            La page demandée n'a pas été trouvée, veuillez vérifier l'URL .
+        </p>
+        <p><a href="{{ path('louvre_ticketing_homepage') }}" class="btn btn-info" role="button" title="Lien 1">Revenir à l'accueil</a></p>
+        </p>
+
+    {% endblock %}
 
 
 

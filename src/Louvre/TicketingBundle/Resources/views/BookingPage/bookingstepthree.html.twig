@@ -14,15 +14,15 @@
 
         Récapitulatif de votre commande :
         <br/>
-        <p><strong>{{ booking.numberOfTickets }}</strong> billet(s) commandé(s) pour le :</p>
+        <p><strong>{{ booking.numberOfTickets }}</strong> {% if booking.numberOfTickets==1 %}billet commandé{% endif %}{% if booking.numberOfTickets>1 %}billets commandés{% endif %} pour le :</p>
         <p><strong>{{ booking.dateOfVisit|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</strong></p>
 
-        <p>Visiteur(s) concerné(s) par cette commande :</p>
+        <p>{% if booking.numberOfTickets==1 %}Visiteur concerné{% endif %}{% if booking.numberOfTickets>1 %}Visiteurs concernés{% endif %} par cette commande :</p>
 
 
     {% for visiteur in tickets %}
         <div class="formulaire-step2">
-        Visiteur n° {{ loop.index }} <br/>
+        {% if booking.numberOfTickets>1 %}Visiteur n° {{ loop.index }} <br/> {% endif %}
         Nom : <B>{{ visiteur.lastname }} {{ visiteur.firstname }}</B><br/>
         Catégorie de billet :   {% if visiteur.price == 10 %}<B> réduit </B>{% endif %}
                                 {% if visiteur.price == 0 %}<B> moins de 4 ans </B>{% endif %}
@@ -38,7 +38,7 @@
         {% endfor %}
 
         <p>Le montant total de la commande s'élève à : <B>{{ booking.bill|number_format(2,',') }} €</B> </p>
-        vos billets vous seront envoyés à l'adresse mail : <B>{{ booking.email }}</B>
+        {% if booking.numberOfTickets==1 %}Votre billet vous sera enoyé{% endif %}{% if booking.numberOfTickets>1 %}Vos billets vous seront envoyés{% endif %} à l'adresse mail : <B>{{ booking.email }}</B>
     </div>
     <div id="wrapper">
         <div id="container">

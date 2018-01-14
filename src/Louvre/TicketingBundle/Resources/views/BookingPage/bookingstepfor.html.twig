@@ -12,7 +12,7 @@
     <div class="well">
         <p><B>Merci de votre commande !</B></p>
 
-        <p>vous allez recevoir vos billets à l'adresse mail indiquée : <B>{{ booking.email }}</B></p>
+        <p>vous allez recevoir {% if booking.numberOfTickets==1 %}votre billet{% endif %}{% if booking.numberOfTickets>1 %}vos billets{% endif %} à l'adresse mail indiquée : <B>{{ booking.email }}</B></p>
 
         <p><a href="{{ path('louvre_ticketing_homepage') }}" class="btn btn-info" role="button" title="Lien 1">Revenir à l'accueil</a></p>
     </div>

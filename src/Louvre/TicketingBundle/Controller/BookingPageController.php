@@ -18,8 +18,10 @@ class BookingPageController extends Controller
 {
 
     /**
+     * first step of the ordering process
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      *
      */
@@ -27,16 +29,13 @@ class BookingPageController extends Controller
     {
 
 
+
         $booking = new Booking();
 
-           if ($this->getBookingSession() != false) {
-                $booking = $this->getBookingSession();
-           }
-
-
-
-        $id = $booking->getId();
-        $dateOfPurchase = $booking->getDateOfPurchase();
+        // we check if there is active session data
+        if ($this->getBookingSession() != false) {
+            $booking = $this->getBookingSession();
+        }
 
 
 
@@ -46,17 +45,16 @@ class BookingPageController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // we get the day of the week
             $dayOfTheWeekVisit = $booking->findDayOfTheWeek();
 
+            // if it's a Tuesday or a Sunday
             if ($dayOfTheWeekVisit == 0 || $dayOfTheWeekVisit == 2) {
                 $this->addFlash('error', 'Désolé ! Les réservation ne sont pas possibles pour les mardi et dimanche !');
                 return $this->redirectToRoute('louvre_ticketing_bookingsteponepage');
             }
 
-
-
-
-
+            // we update the session data
             $this->setBookingSession($booking);
 
             return $this->redirectToRoute("louvre_ticketing_bookingsteptwopage", ['reservationCode' => $booking->getReservationCode()]);
@@ -64,38 +62,33 @@ class BookingPageController extends Controller
         }
 
         return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepone.html.twig', [
-            "dateOfPurchase" => $dateOfPurchase,
-            "id" => $id,
-            "booking" => $booking,
+            'booking' => $booking,
             'form' => $form->createView()
         ]);
     }
 
+
+
     /**
-     * @return Response
+     * second step of the ordering process
      *
+     * @param Request $request
+     * @return Response
      *
      */
     public function bookingStepTwoAction(Request $request)
     {
 
-        $session = $request->getSession();
-
-        $bookingUtilities = $this->container->get('Louvre_Ticketing_Bundle.bookingUtilities');
-
-        if ($session->has('booking')) {
 
 
-            $booking = $session->get('booking');
+        // if the session has order data and is active
+        if ($this->getBookingSession() != false) {
 
-            if ($bookingUtilities->sessionActive($booking) == true) {
+            $booking = $this->getBookingSession();
 
 
-                $id = $booking->getId();
+
                 $booking->addTickets($booking);
-                $dateOfVisit = $booking->getDateOfVisit();
-                $numberOfTickets = $booking->getNumberOfTickets();
-                $duration = $booking->getDuration();
 
                 $form = $this->createForm(BookingStepTwoType::class, $booking);
 
@@ -104,6 +97,7 @@ class BookingPageController extends Controller
 
                     $tickets = $booking->getTickets();
 
+                    // we calculate the price according to the age
                     foreach ($tickets as $ticket) {
                         $birth = $ticket->getBirthDate();
                         $now = new \DateTime('today');
@@ -129,17 +123,11 @@ class BookingPageController extends Controller
                     }
 
 
-
-
                     return $this->redirectToRoute("louvre_ticketing_bookingstepthreepage", ['reservationCode' => $booking->getReservationCode()]);
 
                 }
                 return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingsteptwo.html.twig', [
-                    "booking" => $booking,
-                    "id" => $id,
-                    "duration" => $duration,
-                    "dateOfVisit" => $dateOfVisit,
-                    "numberOfTickets" => $numberOfTickets,
+                    'booking' => $booking,
                     'form' => $form->createView()
                 ]);
 
@@ -148,60 +136,68 @@ class BookingPageController extends Controller
                 $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
                 return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
             }
-        } else {
-            return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
-        }
 
     }
 
+
+
+    /**
+     * third step of the ordering process
+     *
+     * @param Request $request
+     * @return Response
+     *
+     */
     public function bookingStepThreeAction(Request $request)
-{
-
-    $session = $request->getSession();
-
-    $bookingUtilities = $this->container->get('Louvre_Ticketing_Bundle.bookingUtilities');
-
-    if ($session->has('booking')) {
+    {
 
 
-        $booking = $session->get('booking');
 
-        if ($bookingUtilities->sessionActive($booking) == true) {
+        // if the session has order data abd is active
+        if ($this->getBookingSession() != false) {
 
-            $tickets = $booking->getTickets();
+            $booking = $this->getBookingSession();
 
-            $bill = 0;
 
-            foreach ($tickets as $ticket) {
-                $bill = $bill + $ticket->getPrice();
+
+                $tickets = $booking->getTickets();
+
+                // we calculate the total price by adding the price of each ticket
+                $bill = 0;
+
+                foreach ($tickets as $ticket) {
+                    $bill = $bill + $ticket->getPrice();
+                }
+
+                $booking->setBill($bill);
+
+                return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepthree.html.twig', [
+                    'booking' => $booking,
+                    'tickets' => $tickets,
+                ]);
+            } else {
+                $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
+                return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
             }
-
-            $booking->setBill($bill);
-
-            return $this->get('templating')->renderResponse('LouvreTicketingBundle:BookingPage:bookingstepthree.html.twig', [
-                "booking" => $booking,
-                "tickets" => $tickets,
-            ]);
-        } else {
-            $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
-            return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
-        }
-    } else {
-        return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
     }
-}
 
+
+
+    /**
+     * fourth step of the ordering process
+     *
+     * @param Request $request
+     * @return Response
+     *
+     */
     public function bookingStepForAction(Request $request)
     {
 
-        $session = $request->getSession();
+        // if the session has order data and is active
+        if ($this->getBookingSession() != false) {
 
-        //$bookingUtilities = $this->container->get('Louvre_Ticketing_Bundle.bookingUtilities');
+            $booking = $this->getBookingSession();
 
-        if ($session->has('booking')) {
-
-
-            $booking = $session->get('booking');
             $tickets = $booking->getTickets();
 
             \Stripe\Stripe::setApiKey("sk_test_Ui8k9Iq57Y14p3TRj3cV6sSq");
@@ -219,11 +215,17 @@ class BookingPageController extends Controller
                 ));
                 $this->addFlash("success","Le paiement a bien été effectué !");
 
+                // we enter the data in the database
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($booking);
                 $em->flush();
+
+                // we clear the session
+                $session = $request->getSession();
                 $session->clear();
 
+
+                //we compose the email message
                 $message = \Swift_Message::newInstance()
                     ->setSubject("Votre commande de billet(s) pour le Musée du Louvre")
                     ->setFrom('contact@le-louvre.fr')
@@ -239,6 +241,7 @@ class BookingPageController extends Controller
                         'logo' => $logo,
                     ]));
 
+                // we send the email message
                 $this->get('mailer')->send($message);
 
 
@@ -260,13 +263,12 @@ class BookingPageController extends Controller
 
 
 
-            } else {
-                $this->addFlash('error', 'La session a expiré, veuillez recommencer.');
-                return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
-            }
+        } else {
+            $this->addFlash('error', 'La session a expiré, le paiement est annulé, veuillez recommencer.');
+            return $this->redirectToRoute("louvre_ticketing_bookingsteponepage");
+        }
 
     }
-
 
 
 
@@ -287,6 +289,8 @@ class BookingPageController extends Controller
                 $session->clear();
                 return false;
             }
+        } else {
+            return false;
         }
     }
 
